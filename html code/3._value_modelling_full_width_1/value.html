@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Value Modelling | Babel Fish</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#ffdbcb",
+                        "error": "#ba1a1a",
+                        "tertiary": "#9e4300",
+                        "secondary": "#475e8c",
+                        "background": "#f8f9fa",
+                        "secondary-fixed": "#d8e2ff",
+                        "primary-fixed-dim": "#adc7ff",
+                        "outline": "#727785",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#001a41",
+                        "tertiary-fixed-dim": "#ffb691",
+                        "on-surface-variant": "#414754",
+                        "on-secondary-fixed-variant": "#2e4673",
+                        "surface-container-high": "#e7e8e9",
+                        "secondary-container": "#b2c9fe",
+                        "on-tertiary-fixed": "#341100",
+                        "inverse-surface": "#2e3132",
+                        "surface-container-low": "#f3f4f5",
+                        "on-secondary-fixed": "#001a41",
+                        "on-background": "#191c1d",
+                        "surface-variant": "#e1e3e4",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#783100",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e1e3e4",
+                        "surface-bright": "#f8f9fa",
+                        "outline-variant": "#c1c6d6",
+                        "inverse-primary": "#adc7ff",
+                        "on-tertiary-container": "#0e0200",
+                        "on-primary-container": "#ffffff",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#afc7fb",
+                        "primary": "#005bbf",
+                        "primary-container": "#1a73e8",
+                        "on-secondary-container": "#3d5481",
+                        "tertiary-container": "#c55500",
+                        "primary-fixed": "#d8e2ff",
+                        "on-surface": "#191c1d",
+                        "inverse-on-surface": "#f0f1f2",
+                        "surface-tint": "#005bc0",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed-variant": "#004493",
+                        "surface-dim": "#d9dadb",
+                        "surface-container": "#edeeef",
+                        "surface": "#f8f9fa"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .model-card:hover { transform: translateY(-4px); }
+        .model-card-active { border-color: #1a73e8; background-color: #f0f7ff; }
+    </style>
+</head>
+<body class="bg-background text-on-background selection:bg-secondary-container min-h-screen">
+<!-- Main Content Canvas -->
+<main class="min-h-screen relative">
+<!-- TopAppBar -->
+<header class="bg-white/80 dark:bg-gray-950/80 backdrop-blur-md sticky top-0 z-40 w-full flex justify-center border-b border-outline-variant/10 shadow-sm dark:shadow-none">
+<div class="max-w-[1440px] w-full flex justify-between items-center px-8 py-3">
+<div class="flex items-center gap-8">
+<div class="text-2xl font-black text-[#1a73e8] tracking-tighter" style="">Babel Fish</div>
+
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors" style="">
+<span class="material-symbols-outlined" style="">notifications</span>
+</button>
+<button class="p-2 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors" style="">
+<span class="material-symbols-outlined" style="">help_outline</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-primary-fixed overflow-hidden border-2 border-white shadow-sm">
+<img alt="User profile" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTJgpgQCnge6AiAyzKfhgTnW2JIAhWROAtx-UsHtU8IxzbhOFi67bdxQ8wDakzUpVzsCWwpKAJayg3KY7Qu3tfB-iG-l3tqLlRDCje9uVK3OJyvj69tCPpLnCA-PbgNu2-bUXbc1eriGPzkWTcKyEdttA9UpcX7bSYKZ9nT4jNaH_YRE2tVvTaw5ORkwIevHneGD8YISBQaPHST4CNz69Mgn5A1qGa2huMd7OI3J__DmjtoY2AxMEFhqTM9anM-bVQepgtDAe6J50" style=""/>
+</div>
+</div>
+</div>
+</header>
+<!-- Content Area -->
+<div class="p-8 max-w-[1440px] mx-auto">
+<!-- Atmospheric Progress Bar -->
+<div class="mb-12">
+
+<div class="flex items-center justify-center max-w-4xl mx-auto mb-16">
+<!-- Step 1: Completed -->
+<div class="flex flex-col items-center flex-1">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-sm z-10">
+<span class="material-symbols-outlined text-sm" style="">check</span>
+</div>
+<span class="mt-2 text-[10px] font-medium text-on-surface-variant opacity-60 uppercase tracking-tighter text-center px-1">Data Upload</span>
+</div>
+<div class="h-0.5 bg-primary flex-1 -mt-6"></div>
+
+<!-- Step 2: Completed -->
+<div class="flex flex-col items-center flex-1">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-sm z-10">
+<span class="material-symbols-outlined text-sm" style="">check</span>
+</div>
+<span class="mt-2 text-[10px] font-medium text-on-surface-variant opacity-60 uppercase tracking-tighter text-center px-1">Data Translation</span>
+</div>
+<div class="h-0.5 bg-primary flex-1 -mt-6"></div>
+
+<!-- Step 3: Completed -->
+<div class="flex flex-col items-center flex-1">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-sm z-10">
+<span class="material-symbols-outlined text-sm" style="">check</span>
+</div>
+<span class="mt-2 text-[10px] font-medium text-on-surface-variant opacity-60 uppercase tracking-tighter text-center px-1">Data Mapping</span>
+</div>
+<div class="h-0.5 bg-primary flex-1 -mt-6"></div>
+
+<!-- Step 4: Active -->
+<div class="flex flex-col items-center flex-1">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-sm z-10" style="">4</div>
+<span class="mt-2 text-[10px] font-bold text-primary uppercase tracking-tighter text-center px-1">Value Modelling</span>
+</div>
+<div class="h-0.5 bg-surface-container-highest flex-1 -mt-6"></div>
+
+<!-- Step 5 -->
+<div class="flex flex-col items-center flex-1">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold text-sm z-10" style="">5</div>
+<span class="mt-2 text-[10px] font-medium text-on-surface-variant opacity-40 uppercase tracking-tighter text-center px-1">Script Generation</span>
+</div>
+<div class="h-0.5 bg-surface-container-highest flex-1 -mt-6"></div>
+
+<!-- Step 6 -->
+<div class="flex flex-col items-center flex-1">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold text-sm z-10" style="">6</div>
+<span class="mt-2 text-[10px] font-medium text-on-surface-variant opacity-40 uppercase tracking-tighter text-center px-1">Review</span>
+</div>
+</div>
+</div>
+<!-- Select Predictive Model Section -->
+<div class="mb-10">
+<h3 class="text-xl font-bold text-on-surface mb-6" style="">Select Data Model</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card 1: Weighted Scoring -->
+<button id="weighted-scoring-btn" class="model-card group text-left p-6 bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary/20" style="">
+<div class="flex items-center justify-between mb-4">
+<div class="p-3 bg-blue-50 text-primary rounded-xl">
+<span class="material-symbols-outlined" style="">balance</span>
+</div>
+<div class="w-5 h-5 rounded-full border-2 border-outline-variant flex items-center justify-center">
+<div class="w-2 h-2 bg-white rounded-full opacity-0"></div>
+</div>
+</div>
+<h4 class="text-lg font-bold text-on-surface mb-2" style="">Weighted Scoring</h4>
+<p class="text-sm text-on-surface-variant" style="">No historical data?</p>
+</button>
+<!-- Card 2: Regression -->
+<button id="regression-btn" class="model-card group text-left p-6 bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary/20" style="">
+<div class="flex items-center justify-between mb-4">
+<div class="p-3 bg-primary text-white rounded-xl">
+<span class="material-symbols-outlined" style="">trending_up</span>
+</div>
+<div class="w-5 h-5 rounded-full border-2 border-outline-variant group-active:bg-primary group-active:border-primary flex items-center justify-center">
+<div class="w-2 h-2 bg-white rounded-full opacity-0 group-active:opacity-100"></div>
+</div>
+</div>
+<h4 class="text-lg font-bold text-on-surface mb-2" style="">Regression</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed" style="">Have historical data but need simple, explainable ROI predictions?</p>
+</button>
+<!-- Card 3: Machine Learning -->
+<button class="model-card group text-left p-6 bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary/20" style="">
+<div class="flex items-center justify-between mb-4">
+<div class="p-3 bg-purple-50 text-purple-600 rounded-xl">
+<span class="material-symbols-outlined" style="">psychology</span>
+</div>
+<div class="w-5 h-5 rounded-full border-2 border-outline-variant flex items-center justify-center"></div>
+</div>
+<h4 class="text-lg font-bold text-on-surface mb-2" style="">Machine Learning</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed" style="">Have massive amounts of data and want maximum predictive accuracy? Support for Random Forest/XGBoost.</p>
+</button>
+</div>
+</div>
+<!-- Model Result Preview -->
+<div class="mb-10 bg-[#0f172a] rounded-2xl border border-slate-800 overflow-hidden shadow-2xl">
+<div class="px-6 py-4 bg-slate-900 border-b border-slate-800 flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="flex gap-1.5">
+<div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+<div class="w-3 h-3 rounded-full bg-amber-500/80"></div>
+<div class="w-3 h-3 rounded-full bg-emerald-500/80"></div>
+</div>
+<span class="ml-4 text-xs font-mono text-slate-400 uppercase tracking-widest" style="">Model Result Preview</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-1 bg-primary/20 text-primary-fixed-dim rounded-full">
+<span class="material-symbols-outlined text-sm" style="">check_circle</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter" style="">Model Selected</span>
+</div>
+</div>
+<div id="console-output" class="p-8 font-mono text-sm leading-relaxed overflow-x-auto no-scrollbar">
+        <div class="text-slate-500">// Waiting for model selection...</div>
+</div>
+</div>
+<!-- Value Assignment Section -->
+<div class="mb-10">
+<h3 class="text-xl font-bold text-on-surface mb-6" style="">Select Value Assignment Approach</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Option 1 -->
+<button id="min-max-btn" class="model-card group text-left p-5 bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary/20" style="">
+<div class="flex items-center justify-between mb-3">
+<div class="p-2.5 bg-surface-container-high text-on-surface-variant rounded-lg">
+<span class="material-symbols-outlined text-xl" style="">straighten</span>
+</div>
+<div class="w-5 h-5 rounded-full border-2 border-outline-variant flex items-center justify-center">
+<div class="w-2 h-2 bg-white rounded-full opacity-0"></div>
+</div>
+</div>
+<h4 class="text-sm font-bold text-on-surface mb-2" style="">Min-Max Scaling (0-100 Index)</h4>
+<p class="text-xs text-on-surface-variant leading-relaxed" style="">Converts raw scores into a simple 0 to 100 scale for easy, at-a-glance comparison.</p>
+</button>
+<!-- Option 2 -->
+<button id="quantile-btn" class="model-card group text-left p-5 bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary/20" style="">
+<div class="flex items-center justify-between mb-3">
+<div class="p-2.5 bg-surface-container-high text-on-surface-variant rounded-lg">
+<span class="material-symbols-outlined text-xl" style="">format_list_numbered</span>
+</div>
+<div class="w-5 h-5 rounded-full border-2 border-outline-variant flex items-center justify-center">
+<div class="w-2 h-2 bg-white rounded-full opacity-0"></div>
+</div>
+</div>
+<h4 class="text-sm font-bold text-on-surface mb-2" style="">Quantile Binning (Tiering)</h4>
+<p class="text-xs text-on-surface-variant leading-relaxed" style="">Divides ranked items into equal-sized, actionable groups (e.g., Top 10%, Next 20%) for easy prioritization.</p>
+</button>
+<!-- Option 3 -->
+<button id="jenks-btn" class="model-card group text-left p-5 bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary/20" style="">
+<div class="flex items-center justify-between mb-3">
+<div class="p-2.5 bg-surface-container-high text-on-surface-variant rounded-lg">
+<span class="material-symbols-outlined text-xl" style="">auto_graph</span>
+</div>
+<div class="w-5 h-5 rounded-full border-2 border-outline-variant flex items-center justify-center">
+<div class="w-2 h-2 bg-white rounded-full opacity-0"></div>
+</div>
+</div>
+<h4 class="text-sm font-bold text-on-surface mb-2" style="">Jenks Natural Breaks</h4>
+<p class="text-xs text-on-surface-variant leading-relaxed" style="">Automatically groups data by finding natural mathematical gaps to create highly distinct, data-driven categories.</p>
+</button>
+<!-- Option 4 -->
+<button id="relational-btn" class="model-card group text-left p-5 bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary/20" style="">
+<div class="flex items-center justify-between mb-3">
+<div class="p-2.5 bg-surface-container-high text-on-surface-variant rounded-lg">
+<span class="material-symbols-outlined text-xl" style="">database</span>
+</div>
+<div class="w-5 h-5 rounded-full border-2 border-outline-variant flex items-center justify-center">
+<div class="w-2 h-2 bg-white rounded-full opacity-0"></div>
+</div>
+</div>
+<h4 class="text-sm font-bold text-on-surface mb-2" style="">Relational Mapping</h4>
+<p class="text-xs text-on-surface-variant leading-relaxed" style="">Merges your newly calculated scores and tiers directly back into your master database.</p>
+</button>
+</div>
+</div>
+<!-- Final Value Preview -->
+<div class="mb-10 bg-white rounded-2xl border border-outline-variant/30 shadow-sm overflow-hidden">
+<div class="px-6 py-4 bg-surface-container-low border-b border-outline-variant/30 flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg" style="">visibility</span>
+<h3 class="text-sm font-bold text-on-surface" style="">Final Value Preview</h3>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest" style="">Sample Output</span>
+</div>
+<div id="logic-description" class="px-6 py-4 bg-surface-container-low/50 text-sm text-on-surface-variant border-b border-outline-variant/20 hidden">
+</div>
+<div class="overflow-x-auto">
+<div class="max-h-[400px] overflow-y-auto">
+<table class="w-full text-left text-sm">
+<thead class="bg-surface-container-lowest border-b border-outline-variant/20">
+<tr>
+<th class="px-6 py-3 font-semibold text-on-surface-variant" style="">Entity ID</th>
+<th class="px-6 py-3 font-semibold text-on-surface-variant text-right" style="">Assigned Score</th>
+<th class="px-6 py-3 font-semibold text-on-surface-variant text-right" style="">Assigned Index (0-100)</th>
+<th class="px-6 py-3 font-semibold text-on-surface-variant" style="">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10" id="final-preview-body">
+<!-- Rows will be injected here dynamically -->
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Footer Action Row -->
+<div class="mt-12 flex justify-between items-center bg-surface-container-high/30 p-6 rounded-2xl">
+<a href="../2._complex_mapping_aggregation_2/complex.html" class="flex items-center gap-2 text-sm font-bold text-on-surface-variant hover:text-on-surface transition-colors" style="">
+<span class="material-symbols-outlined" style="">arrow_back</span> Back to Mapping
+                </a>
+<div class="flex gap-4">
+<button class="px-8 py-3 rounded-xl border border-outline font-bold text-sm text-on-surface-variant hover:bg-white transition-all" style="">Save Draft</button>
+<button id="approve-gen-btn" class="px-8 py-3 rounded-xl bg-gradient-to-r from-primary to-primary-container text-white font-bold text-sm shadow-lg shadow-primary/20 active:scale-95 transition-all" style="">
+                        Approve &amp; Generate Script
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Visual Polish: Background Vellum effect -->
+<div class="fixed inset-0 pointer-events-none opacity-40 mix-blend-multiply z-[-1]" style="background-image: radial-gradient(#d1d5db 0.5px, transparent 0.5px); background-size: 24px 24px;"></div>
+<script>
+    const weightedScoringBtn = document.getElementById('weighted-scoring-btn');
+    const consoleOutput = document.getElementById('console-output');
+    let modelData = []; // Global state for model results
+
+    if (weightedScoringBtn && consoleOutput) {
+        weightedScoringBtn.addEventListener('click', () => {
+            consoleOutput.innerHTML = `<div class="text-slate-500">// Running Weighted Scoring Model...</div>`;
+            
+            // Selection logic
+            weightedScoringBtn.classList.add('border-2', 'border-primary', 'bg-blue-50/50', 'shadow-md');
+            weightedScoringBtn.classList.remove('border-outline-variant/30', 'shadow-sm');
+            
+            const checkWS = weightedScoringBtn.querySelector('.w-5');
+            if (checkWS) {
+                checkWS.classList.add('bg-primary', 'border-primary');
+                checkWS.classList.remove('border-outline-variant');
+                const dot = checkWS.querySelector('div');
+                if (dot) dot.classList.remove('opacity-0');
+            }
+            
+            const regressionBtn = document.getElementById('regression-btn');
+            if (regressionBtn) {
+                regressionBtn.classList.remove('border-2', 'border-primary', 'bg-blue-50/50', 'shadow-md');
+                regressionBtn.classList.add('border-outline-variant/30', 'shadow-sm');
+                
+                const checkReg = regressionBtn.querySelector('.w-5');
+                if (checkReg) {
+                    checkReg.classList.remove('bg-primary', 'border-primary');
+                    checkReg.classList.add('border-outline-variant');
+                    const dot = checkReg.querySelector('div');
+                    if (dot) dot.classList.add('opacity-0');
+                }
+            }
+            
+            fetch('http://localhost:8006/run_model', {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    consoleOutput.innerHTML = `<div class="text-red-500">Error: ${data.error}</div>`;
+                    return;
+                }
+                renderResults(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                consoleOutput.innerHTML = `<div class="text-red-500">Failed to connect to model server.</div>`;
+            });
+        });
+
+        const regressionBtn = document.getElementById('regression-btn');
+        if (regressionBtn) {
+            regressionBtn.addEventListener('click', () => {
+                regressionBtn.classList.add('border-2', 'border-primary', 'bg-blue-50/50', 'shadow-md');
+                regressionBtn.classList.remove('border-outline-variant/30', 'shadow-sm');
+                
+                const checkReg = regressionBtn.querySelector('.w-5');
+                if (checkReg) {
+                    checkReg.classList.add('bg-primary', 'border-primary');
+                    checkReg.classList.remove('border-outline-variant');
+                    const dot = checkReg.querySelector('div');
+                    if (dot) dot.classList.remove('opacity-0');
+                }
+                
+                weightedScoringBtn.classList.remove('border-2', 'border-primary', 'bg-blue-50/50', 'shadow-md');
+                weightedScoringBtn.classList.add('border-outline-variant/30', 'shadow-sm');
+                
+                const checkWS = weightedScoringBtn.querySelector('.w-5');
+                if (checkWS) {
+                    checkWS.classList.remove('bg-primary', 'border-primary');
+                    checkWS.classList.add('border-outline-variant');
+                    const dot = checkWS.querySelector('div');
+                    if (dot) dot.classList.add('opacity-0');
+                }
+                
+                consoleOutput.innerHTML = `<div class="text-slate-500">// Regression Model selected.</div>`;
+            });
+        }
+    }
+
+    function renderResults(data) {
+        modelData = data;
+        localStorage.setItem('modelResults', JSON.stringify(data));
+        let html = `<div class="text-emerald-400">// Model Execution Successful</div>`;
+        
+        html += `
+        <div class="mt-2 space-y-1">
+            <div class="text-slate-300 font-bold text-sm">### Key Findings:</div>
+            <div class="text-slate-400 text-xs">- Strong positive correlation detected between location clusters and high credit scores.</div>
+            <div class="text-slate-400 text-xs">- Top 5 locations represent the highest value density for reach optimization.</div>
+        </div>
+        `;
+        
+        html += `<div class="text-slate-500 mb-4 text-xs uppercase font-bold tracking-widest mt-4">Signal Correlation Strength</div>`;
+        
+        const top5 = data.slice(0, 5);
+        
+        html += `<div class="space-y-4 bg-slate-900/50 p-6 rounded-xl border border-slate-800">`;
+        
+        top5.forEach(row => {
+            html += `
+            <div class="flex items-center justify-between">
+                <span class="text-slate-300 text-xs w-32 truncate">${row.location}</span>
+                <div class="flex-1 mx-4 h-2 bg-slate-800 rounded-full overflow-hidden relative">
+                    <div class="h-full bg-gradient-to-r from-[#e0e7ff] via-[#6366f1] to-[#1d4ed8] opacity-80" style="width: ${row.dma_value_100}%"></div>
+                </div>
+                <span class="text-primary text-[10px] font-bold">${row.dma_value_100}</span>
+            </div>
+            `;
+        });
+        
+        html += `</div>`;
+        html += `<div class="text-slate-500 mt-4 text-xs">// Full results cached in memory. Top 5 displayed above.</div>`;
+        
+        consoleOutput.innerHTML = html;
+    }
+
+    // Value Assignment Approach Selection
+    const assignmentButtons = [
+        document.getElementById('min-max-btn'),
+        document.getElementById('quantile-btn'),
+        document.getElementById('jenks-btn'),
+        document.getElementById('relational-btn')
+    ];
+
+    assignmentButtons.forEach(btn => {
+        if (btn) {
+            btn.addEventListener('click', () => {
+                // Deselect all
+                assignmentButtons.forEach(b => {
+                    b.classList.remove('border-2', 'border-primary', 'bg-blue-50/50', 'shadow-md');
+                    b.classList.add('border-outline-variant/30', 'shadow-sm');
+                    const dot = b.querySelector('.w-5 > div');
+                    if (dot) dot.classList.add('opacity-0');
+                    const check = b.querySelector('.w-5');
+                    if (check) {
+                        check.classList.remove('bg-primary', 'border-primary');
+                        check.classList.add('border-outline-variant');
+                    }
+                });
+                
+                // Select clicked
+                btn.classList.add('border-2', 'border-primary', 'bg-blue-50/50', 'shadow-md');
+                btn.classList.remove('border-outline-variant/30', 'shadow-sm');
+                const dot = btn.querySelector('.w-5 > div');
+                if (dot) dot.classList.remove('opacity-0');
+                const check = btn.querySelector('.w-5');
+                if (check) {
+                    check.classList.add('bg-primary', 'border-primary');
+                    check.classList.remove('border-outline-variant');
+                }
+                
+                if (modelData.length > 0) {
+                    const logicDescription = document.getElementById('logic-description');
+                    if (logicDescription) {
+                        logicDescription.classList.remove('hidden');
+                        if (btn.id === 'min-max-btn') {
+                            logicDescription.innerHTML = `
+                                <p><strong>Min-Max Scaling:</strong> Linearly projects scores onto a 0-100 index. This preserves the relative distance between scores, making it ideal for maintaining fine-grained value distinctions.</p>
+                            `;
+                        } else if (btn.id === 'quantile-btn') {
+                            logicDescription.innerHTML = `
+                                <p><strong>Quantile Binning:</strong> Divides the ranked locations into 4 equal-sized buckets (Platinum, Gold, Silver, Bronze). This ensures a balanced distribution of locations across tiers, preventing over-concentration in a single bidding value.</p>
+                            `;
+                        }
+                    }
+
+                    const approach = btn.id === 'min-max-btn' ? 'min-max' : (btn.id === 'quantile-btn' ? 'quantile' : '');
+                    
+                    if (approach) {
+                        fetch('http://localhost:8006/assign_value', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ approach, data: modelData })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.error) {
+                                alert('Error: ' + data.error);
+                            } else {
+                                if (approach === 'min-max') {
+                                    populateMinMax(data);
+                                } else if (approach === 'quantile') {
+                                    populateQuantile(data);
+                                }
+                            }
+                        })
+                        .catch(error => console.error('Error:', error));
+                    } else {
+                        alert('Algorithm not implemented yet!');
+                    }
+                } else {
+                    alert('Please run a data model first (click Weighted Scoring)!');
+                }
+            });
+        }
+    });
+
+    function populateMinMax(data) {
+        const body = document.getElementById('final-preview-body');
+        const head = body.parentNode.querySelector('thead');
+        
+        const standardKeys = ["total_users", "high_score_count", "percentage_high_scores", "median_score_of_top_tier", "value_score", "dma_value_100", "dma_tier"];
+        const locationLabel = Object.keys(data[0]).find(k => !standardKeys.includes(k)) || "Location";
+        
+        head.innerHTML = `
+        <tr class="bg-surface-container-lowest border-b border-outline-variant/20">
+            <th class="px-6 py-3 font-semibold text-on-surface-variant">${locationLabel}</th>
+            <th class="px-6 py-3 font-semibold text-on-surface-variant text-right">Total Users</th>
+            <th class="px-6 py-3 font-semibold text-on-surface-variant text-right">High Score Count</th>
+            <th class="px-6 py-3 font-semibold text-on-surface-variant text-right">Index (0-100)</th>
+        </tr>
+        `;
+        
+        let html = '';
+        data.forEach(row => {
+            html += `
+            <tr class="hover:bg-surface-container-low/50 transition-colors">
+                <td class="px-6 py-4 font-mono text-xs">${row[locationLabel]}</td>
+                <td class="px-6 py-4 text-right">${row.total_users}</td>
+                <td class="px-6 py-4 text-right">${row.high_score_count}</td>
+                <td class="px-6 py-4 text-right font-bold text-primary">${row.dma_value_100}</td>
+            </tr>
+            `;
+        });
+        body.innerHTML = html;
+    }
+
+    function populateQuantile(data) {
+        const body = document.getElementById('final-preview-body');
+        const head = body.parentNode.querySelector('thead');
+        
+        const standardKeys = ["total_users", "high_score_count", "percentage_high_scores", "median_score_of_top_tier", "value_score", "dma_value_100", "dma_tier"];
+        const locationLabel = Object.keys(data[0]).find(k => !standardKeys.includes(k)) || "Location";
+        
+        head.innerHTML = `
+        <tr class="bg-surface-container-lowest border-b border-outline-variant/20">
+            <th class="px-6 py-3 font-semibold text-on-surface-variant">${locationLabel}</th>
+            <th class="px-6 py-3 font-semibold text-on-surface-variant text-right">Index (0-100)</th>
+            <th class="px-6 py-3 font-semibold text-on-surface-variant">Tier</th>
+        </tr>
+        `;
+        
+        const ranked = data.filter(x => x.dma_value_100 > 0);
+        const unranked = data.filter(x => x.dma_value_100 === 0);
+        
+        ranked.sort((a, b) => a.dma_value_100 - b.dma_value_100);
+        const n = ranked.length;
+        const labels = ['Bronze', 'Silver', 'Gold', 'Platinum'];
+        
+        const binnedData = [];
+        ranked.forEach((x, index) => {
+            const q = Math.floor((index / n) * 4);
+            binnedData.push({...x, dma_tier: labels[q]});
+        });
+        
+        unranked.forEach(x => binnedData.push({...x, dma_tier: 'Unranked'}));
+        
+        binnedData.sort((a, b) => b.dma_value_100 - a.dma_value_100);
+        
+        let html = '';
+        binnedData.forEach(row => {
+            const statusClass = row.dma_tier === 'Platinum' ? 'bg-emerald-100 text-emerald-700' : 
+                                (row.dma_tier === 'Gold' ? 'bg-blue-100 text-blue-700' : 
+                                (row.dma_tier === 'Silver' ? 'bg-amber-100 text-amber-700' : 'bg-slate-100 text-slate-600'));
+            
+            html += `
+            <tr class="hover:bg-surface-container-low/50 transition-colors">
+                <td class="px-6 py-4 font-mono text-xs">${row[locationLabel]}</td>
+                <td class="px-6 py-4 text-right font-bold text-primary">${row.dma_value_100}</td>
+                <td class="px-6 py-4">
+                    <span class="px-2 py-0.5 ${statusClass} rounded text-[10px] font-bold">${row.dma_tier}</span>
+                </td>
+            </tr>
+            `;
+        });
+        body.innerHTML = html;
+    }
+
+    // Approve & Generate Script logic
+    const approveGenBtn = document.getElementById('approve-gen-btn');
+    if (approveGenBtn) {
+        approveGenBtn.addEventListener('click', () => {
+            const results = {};
+            const rows = document.querySelectorAll('#final-preview-body tr');
+            
+            rows.forEach(row => {
+                const cols = row.querySelectorAll('td');
+                if (cols.length >= 2) {
+                    const location = cols[0].textContent.trim();
+                    const scoreCol = row.querySelector('.font-bold.text-primary');
+                    const score = scoreCol ? parseFloat(scoreCol.textContent) : 0;
+                    
+                    results[location] = score;
+                }
+            });
+            
+            localStorage.setItem('finalValueAssignment', JSON.stringify(results));
+            localStorage.setItem('selectedModel', 'Linear Weighted');
+            
+            fetch('http://localhost:8006/save_results', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ results })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Selected value assignment result saved to local storage and confirmed by server!');
+                window.location.href = '../4._script_generation_correct_progress/script.html';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Saved to local storage, but failed to confirm with server.');
+            });
+        });
+    }
+</script>
+</body></html>

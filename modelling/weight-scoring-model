@@ -1,0 +1,115 @@
+import pandas as pd
+from sklearn.preprocessing import MinMaxScaler
+
+# Load the dataset
+try:
+    # There is a leading space in some column names, and a trailing space in the last one.
+    # Let's clean them up.
+    df = pd.read_csv('input_file_0.csv')
+    df.columns = df.columns.str.strip()
+    # Let's also remove any extra whitespace from the 'location' column if it exists
+    if 'location' in df.columns and df['location'].dtype == 'object':
+        df['location'] = df['location'].str.strip()
+
+except Exception as e:
+    print(f"Error loading or cleaning the CSV file: {e}")
+
+
+# --- Step 1: Aggregate Data and Identify Patterns ---
+
+# Define the threshold for a high credit score
+HIGH_CREDIT_SCORE_THRESHOLD = 750
+
+# Create a boolean column for high credit scores
+df['is_high_credit'] = df['credit_score'] >= HIGH_CREDIT_SCORE_THRESHOLD
+
+# --- Group by location to get base metrics ---
+
+# Total number of users per location
+location_counts = df.groupby('location').size().reset_index(name='total_users')
+
+# Filter for only high credit score users
+high_credit_df = df[df['is_high_credit']].copy()
+
+# Aggregate high-credit metrics
+high_credit_summary = high_credit_df.groupby('location').agg(
+    high_score_count=('credit_score', 'count'),
+    median_score_of_top_tier=('credit_score', 'median')
+).reset_index()
+
+# --- Merge the aggregated data ---
+# This ensures we keep all locations, even those with zero high-score individuals
+dma_performance = pd.merge(location_counts, high_credit_summary, on='location', how='left')
+
+# Fill NaNs with 0 for locations that have no high-credit-score individuals
+dma_performance['high_score_count'] = dma_performance['high_score_count'].fillna(0)
+dma_performance['median_score_of_top_tier'] = dma_performance['median_score_of_top_tier'].fillna(0)
+
+# Calculate the percentage of high scores
+dma_performance['percentage_high_scores'] = (dma_performance['high_score_count'] / dma_performance['total_users']) * 100
+
+
+# --- Step 2: Develop and Apply Weighted Scoring Model ---
+
+# Select the features for normalization
+features_to_normalize = [
+    'high_score_count',
+    'percentage_high_scores',
+    'median_score_of_top_tier'
+]
+
+# Normalize the metrics using Min-Max Scaling (scales to a 0-1 range)
+scaler = MinMaxScaler()
+# The scaler expects a 2D array, so we pass the DataFrame slice
+normalized_features = scaler.fit_transform(dma_performance[features_to_normalize])
+
+# Create a new DataFrame for the normalized features
+normalized_df = pd.DataFrame(normalized_features, columns=[f'norm_{col}' for col in features_to_normalize])
+
+# Combine with the original performance data
+dma_performance = pd.concat([dma_performance, normalized_df], axis=1)
+
+# Define the weights
+weights = {
+    'percentage': 0.5,
+    'count': 0.3,
+    'median_score': 0.2
+}
+
+# Calculate the weighted "Value Score"
+dma_performance['value_score'] = (
+    dma_performance['norm_percentage_high_scores'] * weights['percentage'] +
+    dma_performance['norm_high_score_count'] * weights['count'] +
+    dma_performance['norm_median_score_of_top_tier'] * weights['median_score']
+)
+
+
+# --- Step 3: Assign Final Defined Values ---
+
+# Scale the final score to be between 0 and 100 for easier interpretation
+final_scaler = MinMaxScaler(feature_range=(0, 100))
+dma_performance['dma_value_100'] = final_scaler.fit_transform(dma_performance[['value_score']])
+
+# --- Display the final results ---
+# Sort by the final DMA value for a clear ranking
+final_results = dma_performance.sort_values(by='dma_value_100', ascending=False)
+
+
+# Prepare a clean table for output
+output_table = final_results[[
+    'location',
+    'total_users',
+    'high_score_count',
+    'percentage_high_scores',
+    'median_score_of_top_tier',
+    'dma_value_100'
+]].copy()
+
+# Round the values for cleaner presentation
+output_table['percentage_high_scores'] = output_table['percentage_high_scores'].round(2)
+output_table['dma_value_100'] = output_table['dma_value_100'].round(2)
+
+print("### DMA Valuation Results (Ranked by Value Score)")
+print(output_table.to_markdown(index=False))
+
+

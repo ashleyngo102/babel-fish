@@ -1,0 +1,87 @@
+import pandas as pd
+from sklearn.preprocessing import MinMaxScaler
+import numpy as np
+
+# Load the dataset
+try:
+    df = pd.read_csv('input_file_0.csv')
+    df.columns = df.columns.str.strip()
+    if 'location' in df.columns and df['location'].dtype == 'object':
+        df['location'] = df['location'].str.strip()
+except Exception as e:
+    print(f"Error loading or cleaning the CSV file: {e}")
+
+# --- Step 1 & 2: Recalculate the DMA Value Score ---
+# (This is the same logic as the previous step to ensure the script is self-contained)
+
+HIGH_CREDIT_SCORE_THRESHOLD = 750
+df['is_high_credit'] = df['credit_score'] >= HIGH_CREDIT_SCORE_THRESHOLD
+location_counts = df.groupby('location').size().reset_index(name='total_users')
+high_credit_df = df[df['is_high_credit']].copy()
+high_credit_summary = high_credit_df.groupby('location').agg(
+    high_score_count=('credit_score', 'count'),
+    median_score_of_top_tier=('credit_score', 'median')
+).reset_index()
+dma_performance = pd.merge(location_counts, high_credit_summary, on='location', how='left')
+dma_performance.fillna(0, inplace=True)
+dma_performance['percentage_high_scores'] = (dma_performance['high_score_count'] / dma_performance['total_users']) * 100
+
+features_to_normalize = ['high_score_count', 'percentage_high_scores', 'median_score_of_top_tier']
+scaler = MinMaxScaler()
+normalized_features = scaler.fit_transform(dma_performance[features_to_normalize])
+normalized_df = pd.DataFrame(normalized_features, columns=[f'norm_{col}' for col in features_to_normalize])
+dma_performance = pd.concat([dma_performance, normalized_df], axis=1)
+
+weights = {'percentage': 0.5, 'count': 0.3, 'median_score': 0.2}
+dma_performance['value_score'] = (
+    dma_performance['norm_percentage_high_scores'] * weights['percentage'] +
+    dma_performance['norm_high_score_count'] * weights['count'] +
+    dma_performance['norm_median_score_of_top_tier'] * weights['median_score']
+)
+final_scaler = MinMaxScaler(feature_range=(0, 100))
+dma_performance['dma_value_100'] = final_scaler.fit_transform(dma_performance[['value_score']])
+
+# --- Step 3: Assign Tiers (Value Assignment) ---
+
+# Filter out the locations that have a score of 0, as they are unranked.
+ranked_locations = dma_performance[dma_performance['dma_value_100'] > 0].copy()
+unranked_locations = dma_performance[dma_performance['dma_value_100'] == 0].copy()
+
+# Define the tier labels
+tier_labels = ['Bronze', 'Silver', 'Gold', 'Platinum']
+
+# Use qcut to create 4 quantile-based bins.
+# We use `iloc[::-1]` to reverse the labels so Platinum is for the highest scores.
+ranked_locations['dma_tier'] = pd.qcut(
+    ranked_locations['dma_value_100'],
+    q=4,
+    labels=tier_labels
+)
+
+# Assign the 'Unranked' tier to the locations with a score of 0
+unranked_locations['dma_tier'] = 'Unranked'
+
+# Combine the ranked and unranked locations back together
+final_tiered_results = pd.concat([ranked_locations, unranked_locations])
+
+# Sort by the value score to show the final ranked and tiered list
+final_tiered_results = final_tiered_results.sort_values(by='dma_value_100', ascending=False)
+
+# Prepare a clean table for output
+output_table = final_tiered_results[[
+    'location',
+    'dma_value_100',
+    'dma_tier'
+]].copy()
+output_table['dma_value_100'] = output_table['dma_value_100'].round(2)
+
+print("### DMA Value Assignment with Tiers")
+# Display the top-tiered locations for a preview
+print(output_table.head(20).to_markdown(index=False))
+print("\n... (and so on for all other locations)")
+
+# You can also view the distribution of locations per tier
+print("\n### Distribution of Locations per Tier")
+print(final_tiered_results['dma_tier'].value_counts().to_markdown())
+
+

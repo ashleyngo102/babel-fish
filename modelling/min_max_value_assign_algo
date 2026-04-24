@@ -1,0 +1,78 @@
+import pandas as pd
+from sklearn.preprocessing import MinMaxScaler
+
+# Load the dataset
+try:
+    df = pd.read_csv('input_file_0.csv')
+    df.columns = df.columns.str.strip()
+    if 'location' in df.columns and df['location'].dtype == 'object':
+        df['location'] = df['location'].str.strip()
+except Exception as e:
+    print(f"Error loading or cleaning the CSV file: {e}")
+
+# --- Step 1: Aggregate Data by Location---
+
+# Define the threshold for a high credit score
+HIGH_CREDIT_SCORE_THRESHOLD = 750
+df['is_high_credit'] = df['credit_score'] >= HIGH_CREDIT_SCORE_THRESHOLD
+
+# Calculate total users per location
+location_counts = df.groupby('location').size().reset_index(name='total_users')
+
+# Aggregate high-credit metrics
+high_credit_df = df[df['is_high_credit']].copy()
+high_credit_summary = high_credit_df.groupby('location').agg(
+    high_score_count=('credit_score', 'count'),
+    median_score_of_top_tier=('credit_score', 'median')
+).reset_index()
+
+# Merge data and calculate final metrics
+dma_performance = pd.merge(location_counts, high_credit_summary, on='location', how='left')
+dma_performance.fillna(0, inplace=True)
+dma_performance['percentage_high_scores'] = (dma_performance['high_score_count'] / dma_performance['total_users']) * 100
+
+# --- Step 2: Calculate a Raw Value Score ---
+
+# Normalize the three key metrics to a 0-1 range before applying weights
+features_to_normalize = ['high_score_count', 'percentage_high_scores', 'median_score_of_top_tier']
+scaler_norm = MinMaxScaler()
+normalized_features = scaler_norm.fit_transform(dma_performance[features_to_normalize])
+normalized_df = pd.DataFrame(normalized_features, columns=[f'norm_{col}' for col in features_to_normalize])
+dma_performance = pd.concat([dma_performance, normalized_df], axis=1)
+
+# Define weights and calculate the initial weighted score
+weights = {'percentage': 0.5, 'count': 0.3, 'median_score': 0.2}
+dma_performance['value_score'] = (
+    dma_performance['norm_percentage_high_scores'] * weights['percentage'] +
+    dma_performance['norm_high_score_count'] * weights['count'] +
+    dma_performance['norm_median_score_of_top_tier'] * weights['median_score']
+)
+
+# --- Step 3: Apply Min-Max Scaling (0-100 Index) ---
+
+# Initialize the scaler to create a 0-100 range
+final_scaler = MinMaxScaler(feature_range=(0, 100))
+
+# Apply the scaling to the 'value_score' column to create the final index
+dma_performance['dma_value_100'] = final_scaler.fit_transform(dma_performance[['value_score']])
+
+# --- Final Report Generation ---
+
+# Sort by the final DMA value for a clear ranking
+final_results = dma_performance.sort_values(by='dma_value_100', ascending=False)
+
+# Prepare a clean table for the report
+report_table = final_results[[
+    'location',
+    'total_users',
+    'high_score_count',
+    'dma_value_100'
+]].copy()
+
+# Round the final index for cleaner presentation
+report_table['dma_value_100'] = report_table['dma_value_100'].round(2)
+
+print("### Report: Location Value Based on 0-100 Index")
+# Display the full report
+with pd.option_context('display.max_rows', None):
+    print(report_table.to_markdown(index=False))

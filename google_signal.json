@@ -1,0 +1,504 @@
+{
+  "Signals": {
+    "Dimension Variables": {
+      "General": [
+        {
+          "name": "advertiser_id",
+          "type": "Integer",
+          "description": "The advertiser identifier from Display & Video 360."
+        },
+        {
+          "name": "insertion_order_id",
+          "type": "Integer",
+          "description": "The insertion order identifier from Display & Video 360."
+        },
+        {
+          "name": "line_item_id",
+          "type": "Integer",
+          "description": "The line item identifier from Display & Video 360."
+        },
+        {
+          "name": "date",
+          "type": "Integer",
+          "description": "The date the impression was made. Format: yyyymmdd"
+        }
+      ],
+      "Date/Time": [
+        {
+          "name": "day_of_week",
+          "type": "Integer",
+          "description": "The numerical code for the day of the week the impression was made. 0 for Sunday, 1 for Monday, 2 for Tuesday, 3 for Wednesday, 4 for Thursday, 5 for Friday, 6 for Saturday"
+        },
+        {
+          "name": "hour_of_day",
+          "type": "Integer",
+          "description": "The hour the impression was made using the browser's local time zone in the 24-hour format. Valid inputs: 0 - 23"
+        },
+        {
+          "name": "utc_date",
+          "type": "Integer",
+          "description": "The date the impression was made using coordinated universal time (UTC). Format: yyyymmdd"
+        },
+        {
+          "name": "utc_hour_of_day",
+          "type": "Integer",
+          "description": "The hour the impression was made using coordinated universal time (UTC) in 24-hour format. Valid inputs: 0 - 23"
+        }
+      ],
+      "Location": [
+        {
+          "name": "city_id",
+          "type": "Integer",
+          "description": "The city identifier."
+        },
+        {
+          "name": "country_code",
+          "type": "String",
+          "description": "The country or region code."
+        },
+        {
+          "name": "country_id",
+          "type": "Integer",
+          "description": "The country or region identifier."
+        },
+        {
+          "name": "dma_id",
+          "type": "Integer",
+          "description": "The designated market area (DMA) identifier."
+        },
+        {
+          "name": "zip_postal_code",
+          "type": "String",
+          "description": "The ZIP or postal code."
+        }
+      ],
+      "Creative (General)": [
+        {
+          "name": "ad_type",
+          "type": "Integer",
+          "description": "The numerical code representing the ad format: 0 for display, 1 for video, 2 for audio"
+        },
+        {
+          "name": "creative_height",
+          "type": "Integer",
+          "description": "Creative height in pixels. Note: For display creatives only."
+        },
+        {
+          "name": "creative_id",
+          "type": "Integer",
+          "description": "The creative ID as it appears in Display & Video 360."
+        },
+        {
+          "name": "creative_width",
+          "type": "Integer",
+          "description": "Creative width in pixels. Note: For display creatives only."
+        }
+      ],
+      "Computer System": [
+        {
+          "name": "browser_reportable_id",
+          "type": "Integer",
+          "description": "The browser identifier. Note: browser_id was migrated to browser_reportable_id."
+        },
+        {
+          "name": "browser_timezone_offset_minutes",
+          "type": "Integer",
+          "description": "The difference in minutes between the active time zone on the browser and GMT-12."
+        },
+        {
+          "name": "device_type",
+          "type": "Integer",
+          "description": "The numerical code representing the device type: 0 for desktop, 1 for unknown, 2 for smart phone, 3 for tablet, 4 for smart TV, 5 for connected TV, 6 for set top box, 7 for connected device"
+        },
+        {
+          "name": "environment",
+          "type": "Integer",
+          "description": "The numerical code representing the serving environment for your ad. 10 for web optimized for device, 11 for web not optimized for device, 12 for app"
+        },
+        {
+          "name": "isp_reportable_isp",
+          "type": "Integer",
+          "description": "The internet service provider (ISP) identifier. Note: isp_id was migrated to isp_reportable_isp."
+        },
+        {
+          "name": "language",
+          "type": "String",
+          "description": "The browser's language setting."
+        },
+        {
+          "name": "mobile_make_reportable_id",
+          "type": "Integer",
+          "description": "The mobile make identifier. Note: mobile_make_id was migrated to mobile_make_reportable_id."
+        },
+        {
+          "name": "mobile_model_reportable_id",
+          "type": "Integer",
+          "description": "The mobile model identifier. Note: mobile_model_id was migrated to mobile_model_reportable_id."
+        },
+        {
+          "name": "net_speed",
+          "type": "Integer",
+          "description": "The numerical code representing the network speed detected when the impression was made."
+        },
+        {
+          "name": "operating_system_reportable_id",
+          "type": "Integer",
+          "description": "The operating system identifier. Note: operating_system_id was migrated to operating_system_reportable_id."
+        }
+      ],
+      "Serving (General)": [
+        {
+          "name": "ad_position",
+          "type": "Integer",
+          "description": "The numerical code representing the ad placement position: 0 for unknown position, 1 for above the fold, 2 for below the fold"
+        },
+        {
+          "name": "adx_page_categories",
+          "type": "List of integers",
+          "description": "The page category identifier."
+        },
+        {
+          "name": "channels",
+          "type": "List of integers",
+          "description": "The channel identifier from Display & Video 360."
+        },
+        {
+          "name": "domain",
+          "type": "String",
+          "description": "The root domain name which consists of the domain name and the top-level domain."
+        },
+        {
+          "name": "exchange_id",
+          "type": "Integer",
+          "description": "The exchange identifier."
+        },
+        {
+          "name": "site_id",
+          "type": "Integer",
+          "description": "The site identifier."
+        }
+      ],
+      "Active View": [
+        {
+          "name": "active_view_measurable",
+          "type": "Boolean",
+          "description": "Returns 1 for true if the impression was measurable by Active View when your ad was served."
+        },
+        {
+          "name": "active_view_viewed",
+          "type": "Boolean",
+          "description": "Returns 1 for true once Active View detects that your ad has been viewed."
+        }
+      ],
+      "Event": [
+        {
+          "name": "click",
+          "type": "Boolean",
+          "description": "Returns 1 for true if the ad was clicked."
+        },
+        {
+          "name": "time_on_screen_seconds",
+          "type": "Integer",
+          "description": "The time the ad was on screen in seconds."
+        }
+      ],
+      "Video": [
+        {
+          "name": "audible",
+          "type": "Boolean",
+          "description": "Supported for real-time bidding (RTB) videos only. Returns 1 for true if the video’s sound was ON when viewed."
+        },
+        {
+          "name": "completed_in_view_audible",
+          "type": "Boolean",
+          "description": "Supported for real-time bidding (RTB) videos only. Returns 1 for true if the video had the sound ON when viewed."
+        },
+        {
+          "name": "video_completed",
+          "type": "Boolean",
+          "description": "Only applies to video ad types. Returns 1 for true if the video was completed."
+        },
+        {
+          "name": "video_player_height_start",
+          "type": "Integer",
+          "description": "The video player height at first frame in pixels."
+        },
+        {
+          "name": "video_player_size",
+          "type": "Integer",
+          "description": "The numerical code representing the target video inventory based on the video player size: 0 for unknown, 1 for small, 2 for large, 3 for high definition (HD)"
+        },
+        {
+          "name": "video_player_width_start",
+          "type": "Integer",
+          "description": "The video player width at first frame in pixels."
+        },
+        {
+          "name": "video_resized",
+          "type": "Binary",
+          "description": "Returns 1 for true if the video player was resized during playback."
+        },
+        {
+          "name": "viewable_on_complete",
+          "type": "Boolean",
+          "description": "Supported for real-time bidding (RTB) videos only. Returns 1 for true if the video was viewed on completion."
+        },
+        {
+          "name": "video_content_duration_bucket",
+          "type": "Integer",
+          "description": "The numerical code that represents the video's bucket."
+        },
+        {
+          "name": "video_genre_ids",
+          "type": "List of integers",
+          "description": "Represents a list of video genre IDs for targeting ads based on related groups of audio and video inventory."
+        },
+        {
+          "name": "video_livestream",
+          "type": "Boolean",
+          "description": "Returns true if the video is a livestream."
+        }
+      ]
+    },
+    "Conversions": [
+      {
+        "name": "total_conversion_count",
+        "type": "Double",
+        "description": "The total number of conversion events for ID pair. Arguments: Floodlight Activity ID, Attribution Model ID."
+      },
+      {
+        "name": "total_conversion_value",
+        "type": "Double",
+        "description": "Takes the revenue value from activities tracked by Floodlight Sales tags. Arguments: Floodlight Activity ID, Attribution Model ID."
+      },
+      {
+        "name": "total_conversion_quantity",
+        "type": "Double",
+        "description": "The total quantity of conversions attributed to the given ID pair. Arguments: Floodlight Activity ID, Attribution Model ID."
+      },
+      {
+        "name": "conversion_custom_variable",
+        "type": "String",
+        "description": "The string value of the custom variable for the latest attributed conversion for the impression. Arguments: Floodlight Activity ID, Attribution Model ID, Custom Variable Index."
+      },
+      {
+        "name": "conversion_variable_num",
+        "type": "Integer",
+        "description": "Gets the latest conversion with positive credit to get the “num” Floodlight variable if it exists. Arguments: Floodlight Activity ID, Attribution Model ID."
+      },
+      {
+        "name": "conversion_variable_ord",
+        "type": "String",
+        "description": "Gets the latest conversion with positive credit to get the “ord” Floodlight variable if it exists. Arguments: Floodlight Activity ID, Attribution Model ID."
+      }
+    ],
+    "Google Analytics": [
+      {
+        "name": "has_ga4_conversions",
+        "type": "Boolean",
+        "description": "Returns true if a given impression has at least one conversion with a property ID and conversion event attributed. Arguments: property_id, conversion_event_name."
+      },
+      {
+        "name": "ga4_conversions_count",
+        "type": "Integer",
+        "description": "Returns the number of conversions with a property ID and conversion event attributed to the given impression. Arguments: property_id, conversion_event_name."
+      },
+      {
+        "name": "ga4_conversions_max_value",
+        "type": "Double",
+        "description": "Returns the highest value assigned to a conversion with a property ID and conversion event attributed to the given impression. Arguments: property_id, conversion_event_name."
+      },
+      {
+        "name": "ga4_conversions_max_value_usd",
+        "type": "Double",
+        "description": "Note: For Google Analytics accounts using USD currency. Returns the highest value assigned to a conversion with a property ID and conversion ID attributed to the given impression. Arguments: property_id, conversion_event_name."
+      },
+      {
+        "name": "ga4_conversions_total_value",
+        "type": "Double",
+        "description": "Returns the sum of the weight values assigned to conversions with a property ID and conversion event attributed to the given impression. Arguments: GA4 property ID, conversion_event_name."
+      },
+      {
+        "name": "ga4_conversions_total_value_usd",
+        "type": "Double",
+        "description": "Note: For Google Analytics accounts using USD currency. Returns the sum of the weight values assigned to conversions with a property ID and conversion event attributed to the given impression. Arguments: property_id, conversion_event_name."
+      }
+    ]
+  },
+  "Functions": [
+    {
+      "name": "first_match_aggregate",
+      "type": "Double",
+      "description": "Returns the weight value assigned to the first criteria in the array that returns true."
+    },
+    {
+      "name": "max_aggregate",
+      "type": "Double",
+      "description": "Returns the highest weight value assigned to criteria that returns true."
+    },
+    {
+      "name": "sum_aggregate",
+      "type": "Double",
+      "description": "Returns the sum of all values assigned to all criteria that return true."
+    },
+    {
+      "name": "bool",
+      "type": "bool(x)",
+      "description": "Returns a boolean value: true or false."
+    },
+    {
+      "name": "float",
+      "type": "float(x)",
+      "description": "Converts a number or a string data type: Returns a floating point."
+    },
+    {
+      "name": "int",
+      "type": "int(x)",
+      "description": "Converts a number or a string data type and returns an integer."
+    },
+    {
+      "name": "str",
+      "type": "str(object)",
+      "description": "Converts a data type and returns a string."
+    },
+    {
+      "name": "log",
+      "type": "log(x[, base])",
+      "description": "With one argument: Returns the natural logarithm of x (to base e). With two arguments: Returns the logarithm of x to the given base."
+    }
+  ],
+  "Video Genre Mappings": {
+    "2": "/Adult",
+    "3": "/Arts & Entertainment",
+    "317": "/Arts & Entertainment/Comics & Animation/Anime & Manga",
+    "319": "/Arts & Entertainment/Comics & Animation/Cartoons",
+    "1108": "/Arts & Entertainment/Entertainment Industry/Film & TV Industry/Film & TV Awards",
+    "569": "/Arts & Entertainment/Events & Listings",
+    "1273": "/Arts & Entertainment/Events & Listings/Live Sporting Events",
+    "895": "/Arts & Entertainment/Humor/Live Comedy",
+    "1097": "/Arts & Entertainment/Movies/Action & Adventure Films",
+    "1099": "/Arts & Entertainment/Movies/Action & Adventure Films/Western Films",
+    "1095": "/Arts & Entertainment/Movies/Comedy Films",
+    "615": "/Arts & Entertainment/Movies/Horror Films",
+    "1105": "/Arts & Entertainment/Movies/Musical Films",
+    "1310": "/Arts & Entertainment/Movies/Romance Films",
+    "616": "/Arts & Entertainment/Movies/Science Fiction & Fantasy Films",
+    "1096": "/Arts & Entertainment/Movies/Thriller, Crime & Mystery Films",
+    "35": "/Arts & Entertainment/Music & Audio",
+    "449": "/Arts & Entertainment/Offbeat/Occult & Paranormal",
+    "23": "/Arts & Entertainment/Performing Arts",
+    "894": "/Arts & Entertainment/Performing Arts/Acting & Theater",
+    "581": "/Arts & Entertainment/Performing Arts/Dance",
+    "1185": "/Arts & Entertainment/Performing Arts/Opera",
+    "358": "/Arts & Entertainment/TV & Video/TV Shows & Programs",
+    "1047": "/Arts & Entertainment/TV & Video/TV Shows & Programs/TV Comedies",
+    "1411": "/Arts & Entertainment/TV & Video/TV Shows & Programs/TV Documentary & Nonfiction",
+    "1193": "/Arts & Entertainment/TV & Video/TV Shows & Programs/TV Dramas",
+    "1111": "/Arts & Entertainment/TV & Video/TV Shows & Programs/TV Dramas/TV Crime & Legal Shows",
+    "357": "/Arts & Entertainment/TV & Video/TV Shows & Programs/TV Dramas/TV Soap Operas",
+    "1110": "/Arts & Entertainment/TV & Video/TV Shows & Programs/TV Family-Oriented Shows",
+    "1050": "/Arts & Entertainment/TV & Video/TV Shows & Programs/TV Game Shows",
+    "1049": "/Arts & Entertainment/TV & Video/TV Shows & Programs/TV Reality Shows",
+    "1112": "/Arts & Entertainment/TV & Video/TV Shows & Programs/TV Sci-Fi & Fantasy Shows",
+    "1410": "/Arts & Entertainment/TV & Video/TV Shows & Programs/TV Talent & Variety Shows",
+    "1048": "/Arts & Entertainment/TV & Video/TV Shows & Programs/TV Talk Shows",
+    "24": "/Arts & Entertainment/Visual Art & Design",
+    "47": "/Autos & Vehicles",
+    "1191": "/Autos & Vehicles/Bicycles & Accessories",
+    "1405": "/Autos & Vehicles/Bicycles & Accessories/Mountain Bikes",
+    "273": "/Autos & Vehicles/Motor Vehicles (By Type)/Motorcycles",
+    "148": "/Autos & Vehicles/Motor Vehicles (By Type)/Off-Road Vehicles",
+    "185": "/Beauty & Fitness/Fashion & Style",
+    "94": "/Beauty & Fitness/Fitness",
+    "241": "/Beauty & Fitness/Fitness/Bodybuilding",
+    "1418": "/Beauty & Fitness/Fitness/Fitness Instruction & Personal Training",
+    "46": "/Business & Industrial/Agriculture & Forestry",
+    "5": "/Computers & Electronics",
+    "122": "/Food & Drink/Cooking & Recipes",
+    "39": "/Games/Card Games",
+    "924": "/Games/Card Games/Poker & Casino Games",
+    "41": "/Games/Computer & Video Games",
+    "698": "/Games/Gambling/Sports Betting/Horse & Dog Racing",
+    "939": "/Games/Table Games/Billiards",
+    "940": "/Games/Table Games/Table Tennis",
+    "45": "/Health",
+    "284": "/Hobbies & Leisure/Crafts",
+    "688": "/Hobbies & Leisure/Outdoors",
+    "462": "/Hobbies & Leisure/Outdoors/Fishing",
+    "461": "/Hobbies & Leisure/Outdoors/Hunting & Shooting",
+    "999": "/Hobbies & Leisure/Recreational Aviation",
+    "678": "/Hobbies & Leisure/Special Occasions/Holidays & Seasonal Events",
+    "459": "/Hobbies & Leisure/Water Activities/Boating",
+    "11": "/Home & Garden",
+    "158": "/Home & Garden/Home Improvement",
+    "966": "/Law & Government/Government/State & Local Government",
+    "75": "/Law & Government/Legal",
+    "366": "/Law & Government/Military",
+    "16": "/News",
+    "784": "/News/Business News",
+    "396": "/News/Politics",
+    "1201": "/News/Politics/Opinion & Commentary",
+    "1077": "/News/Sports News",
+    "785": "/News/Technology News",
+    "63": "/News/Weather",
+    "113": "/People & Society/Ethnic & Identity Groups/Lesbian, Gay, Bisexual & Transgender",
+    "58": "/People & Society/Family & Relationships/Family/Parenting",
+    "59": "/People & Society/Religion & Belief",
+    "870": "/People & Society/Self-Help & Motivational",
+    "57": "/People & Society/Social Issues & Advocacy/Charity & Philanthropy",
+    "82": "/People & Society/Social Issues & Advocacy/Green Living & Environmental Issues",
+    "886": "/Pets & Animals/Pets/Dogs",
+    "888": "/Pets & Animals/Pets/Horses",
+    "119": "/Pets & Animals/Wildlife",
+    "690": "/Reference/General Reference/Biographies & Quotations",
+    "694": "/Reference/General Reference/How-To, DIY & Expert Content",
+    "433": "/Reference/Humanities/History",
+    "1288": "/Reference/Humanities/History/Military History",
+    "174": "/Science",
+    "18": "/Shopping",
+    "64": "/Shopping/Antiques & Collectibles",
+    "292": "/Shopping/Auctions",
+    "69": "/Shopping/Consumer Resources",
+    "1666": "/Sports/Animal Sports",
+    "568": "/Sports/Animal Sports/Equestrian",
+    "515": "/Sports/Combat Sports/Boxing",
+    "516": "/Sports/Combat Sports/Martial Arts",
+    "1674": "/Sports/Combat Sports/Martial Arts/Mixed Martial Arts",
+    "512": "/Sports/Combat Sports/Wrestling",
+    "1681": "/Sports/Combat Sports/Wrestling/Professional Wrestling",
+    "554": "/Sports/Extreme Sports",
+    "1206": "/Sports/Extreme Sports/Drag & Street Racing",
+    "1000": "/Sports/Individual Sports",
+    "1016": "/Sports/Individual Sports/Bowling",
+    "458": "/Sports/Individual Sports/Cycling",
+    "261": "/Sports/Individual Sports/Golf",
+    "519": "/Sports/Individual Sports/Gymnastics",
+    "262": "/Sports/Individual Sports/Racquet Sports",
+    "1376": "/Sports/Individual Sports/Racquet Sports/Tennis",
+    "541": "/Sports/Individual Sports/Running & Walking",
+    "1126": "/Sports/Individual Sports/Skate Sports",
+    "518": "/Sports/Individual Sports/Track & Field",
+    "513": "/Sports/International Sports Competitions/Olympics",
+    "180": "/Sports/Motor Sports",
+    "1595": "/Sports/Motor Sports/Auto Racing",
+    "1596": "/Sports/Motor Sports/Motorcycle Racing",
+    "1001": "/Sports/Team Sports",
+    "258": "/Sports/Team Sports/American Football",
+    "259": "/Sports/Team Sports/Baseball",
+    "264": "/Sports/Team Sports/Basketball",
+    "534": "/Sports/Team Sports/Cheerleading",
+    "296": "/Sports/Team Sports/Cricket",
+    "1017": "/Sports/Team Sports/Handball",
+    "260": "/Sports/Team Sports/Hockey",
+    "517": "/Sports/Team Sports/Rugby",
+    "294": "/Sports/Team Sports/Soccer",
+    "699": "/Sports/Team Sports/Volleyball",
+    "118": "/Sports/Water Sports",
+    "1593": "/Sports/Water Sports/Surfing",
+    "1594": "/Sports/Water Sports/Swimming",
+    "265": "/Sports/Winter Sports",
+    "1149": "/Sports/Winter Sports/Ice Skating",
+    "1148": "/Sports/Winter Sports/Skiing & Snowboarding",
+    "67": "/Travel & Transportation"
+  }
+}

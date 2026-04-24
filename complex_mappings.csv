@@ -1,0 +1,3 @@
+Client Column,Selected Signal,Relationship Logic,Is Selected,Original Column
+City_id,City_id,One-to-Many,True,location
+credit_score,Undetected,Data Input,True,credit_score

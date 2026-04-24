@@ -1,0 +1,273 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(16px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline": "#727785",
+                      "surface-container-high": "#e7e8e9",
+                      "on-tertiary": "#ffffff",
+                      "tertiary-fixed-dim": "#ffb691",
+                      "tertiary-container": "#c55500",
+                      "on-secondary-fixed": "#001a41",
+                      "tertiary": "#9e4300",
+                      "secondary": "#475e8c",
+                      "on-tertiary-container": "#0e0200",
+                      "outline-variant": "#c1c6d6",
+                      "on-error-container": "#93000a",
+                      "on-secondary-fixed-variant": "#2e4673",
+                      "on-background": "#191c1d",
+                      "primary": "#005bbf",
+                      "error-container": "#ffdad6",
+                      "surface-container-highest": "#e1e3e4",
+                      "surface-dim": "#d9dadb",
+                      "secondary-fixed-dim": "#afc7fb",
+                      "on-error": "#ffffff",
+                      "primary-fixed": "#d8e2ff",
+                      "surface": "#f8f9fa",
+                      "primary-fixed-dim": "#adc7ff",
+                      "inverse-on-surface": "#f0f1f2",
+                      "error": "#ba1a1a",
+                      "surface-variant": "#e1e3e4",
+                      "on-primary-fixed": "#001a41",
+                      "on-primary-container": "#ffffff",
+                      "background": "#f8f9fa",
+                      "on-secondary-container": "#3d5481",
+                      "surface-container": "#edeeef",
+                      "surface-container-lowest": "#ffffff",
+                      "primary-container": "#1a73e8",
+                      "on-surface": "#191c1d",
+                      "on-tertiary-fixed-variant": "#783100",
+                      "tertiary-fixed": "#ffdbcb",
+                      "inverse-surface": "#2e3132",
+                      "on-surface-variant": "#414754",
+                      "surface-tint": "#005bc0",
+                      "secondary-container": "#b2c9fe",
+                      "on-tertiary-fixed": "#341100",
+                      "surface-container-low": "#f3f4f5",
+                      "inverse-primary": "#adc7ff",
+                      "surface-bright": "#f8f9fa",
+                      "on-primary": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "on-primary-fixed-variant": "#004493",
+                      "secondary-fixed": "#d8e2ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {},
+              "fontFamily": {
+                      "headline": ["Inter"],
+                      "body": ["Inter"],
+                      "label": ["Inter"]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- Persistent Top Bar Panel -->
+<header class="fixed top-0 left-0 right-0 h-16 bg-white border-b border-surface-container-high z-[60] px-12 flex items-center justify-between">
+<div class="text-2xl font-black text-[#1a73e8] tracking-tighter" style="">
+            Babel Fish
+        </div>
+<div class="flex items-center space-x-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer text-[22px]" data-icon="help_outline" style="">help_outline</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer text-[22px]" data-icon="account_circle" style="">account_circle</span>
+</div>
+</header>
+<main class="pt-28 pb-40 px-12 max-w-screen-2xl mx-auto min-h-screen">
+<!-- Stepper -->
+<div class="mb-16">
+<div class="flex items-center justify-center max-w-4xl mx-auto">
+<!-- Step 1: Completed -->
+<div class="flex flex-col items-center flex-1">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-sm z-10">
+<span class="material-symbols-outlined text-sm" style="">check</span>
+</div>
+<span class="mt-2 text-[10px] font-medium text-on-surface-variant opacity-60 uppercase tracking-tighter text-center px-1" style="">Data Upload</span>
+</div>
+<div class="h-0.5 bg-primary flex-1 -mt-6"></div>
+<!-- Step 2: Active -->
+<div class="flex flex-col items-center flex-1">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-sm z-10" style="">2</div>
+<span class="mt-2 text-[10px] font-bold text-primary uppercase tracking-tighter text-center px-1" style="">Data Translation</span>
+</div>
+<div class="h-0.5 bg-surface-container-highest flex-1 -mt-6"></div>
+<!-- Step 3 -->
+<div class="flex flex-col items-center flex-1">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold text-sm z-10" style="">3</div>
+<span class="mt-2 text-[10px] font-medium text-on-surface-variant opacity-40 uppercase tracking-tighter text-center px-1" style="">Data Mapping</span>
+</div>
+<div class="h-0.5 bg-surface-container-highest flex-1 -mt-6"></div>
+<!-- Step 4 -->
+<div class="flex flex-col items-center flex-1">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold text-sm z-10" style="">4</div>
+<span class="mt-2 text-[10px] font-medium text-on-surface-variant opacity-40 uppercase tracking-tighter text-center px-1" style="">Value Modelling</span>
+</div>
+<div class="h-0.5 bg-surface-container-highest flex-1 -mt-6"></div>
+<!-- Step 5 -->
+<div class="flex flex-col items-center flex-1">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold text-sm z-10" style="">5</div>
+<span class="mt-2 text-[10px] font-medium text-on-surface-variant opacity-40 uppercase tracking-tighter text-center px-1" style="">Script Generation</span>
+</div>
+<div class="h-0.5 bg-surface-container-highest flex-1 -mt-6"></div>
+<!-- Step 6 -->
+<div class="flex flex-col items-center flex-1">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold text-sm z-10" style="">6</div>
+<span class="mt-2 text-[10px] font-medium text-on-surface-variant opacity-40 uppercase tracking-tighter text-center px-1" style="">Review</span>
+</div>
+</div>
+</div>
+<!-- Content Header -->
+<div class="mb-12">
+<h1 class="text-4xl font-extrabold text-on-surface tracking-tight mb-2" style="">1:1 Identifier Translation</h1>
+<p class="text-on-surface-variant text-lg max-w-2xl leading-relaxed" style="">
+                Review and approve the automatic mappings detected between your source data and the target schema. These are high-confidence direct matches.
+            </p>
+</div>
+<!-- Data Grid (Bento Style) -->
+<div class="bg-surface-container-low rounded-xl overflow-hidden p-1">
+<div id="mapping-grid" class="bg-surface-container-lowest rounded-lg shadow-sm">
+<!-- Grid Header -->
+<div class="grid grid-cols-12 gap-4 px-8 py-5 bg-surface-container text-xs font-bold uppercase tracking-widest text-on-surface-variant border-none">
+<div class="col-span-3" style="">Client Column</div>
+<div class="col-span-3" style="">Google Signal Matched</div>
+<div class="col-span-3" style="">Relationship Logic</div>
+<div class="col-span-3 text-right" style="">Required Action</div>
+</div>
+<div id="rows-container" class="divide-y divide-surface-container">
+<!-- Rows will be injected here -->
+</div>
+</div>
+</div>
+<!-- Decorative Info Card -->
+<div class="mt-12 grid grid-cols-12 gap-8">
+<div class="col-span-12 bg-tertiary-fixed rounded-xl p-8 flex items-start space-x-6 lg:col-span-12">
+<span class="material-symbols-outlined text-tertiary text-3xl" data-icon="auto_awesome" data-weight="fill" style="font-variation-settings: &quot;FILL&quot; 1;">auto_awesome</span>
+<div>
+<h3 class="text-on-tertiary-fixed font-bold text-lg mb-1" style="">Intelligent Detection Active</h3>
+<p class="text-on-tertiary-fixed-variant leading-relaxed" style="">Babel Fish has analyzed your source schema and identified these mappings with &gt;99% confidence. Approving these identifiers will enable core attribution modeling.</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="fixed bottom-0 w-full bg-[#f8f9fa] dark:bg-[#191c1d] z-50">
+<div class="bg-gradient-to-r from-transparent via-[#edeeef] to-transparent h-[1px]"></div>
+<div class="flex justify-end items-center space-x-4 px-12 py-8 w-full max-w-screen-2xl mx-auto">
+<a href="../0._goal_selection_upload/goal.html" class="text-[#414754] dark:text-[#e1e3e4] px-4 py-2 hover:bg-[#edeeef] rounded-md font-['Inter'] text-sm uppercase tracking-widest transition-all inline-block text-center" style="">
+                Back
+            </a>
+<button class="text-[#414754] dark:text-[#e1e3e4] px-4 py-2 hover:bg-[#edeeef] rounded-md font-['Inter'] text-sm uppercase tracking-widest transition-all" style="">
+                Save Draft
+            </button>
+<a href="../2._complex_mapping_aggregation_2/complex.html" class="bg-gradient-to-br from-[#005bbf] to-[#1a73e8] text-white px-6 py-2 rounded-md font-bold shadow-lg font-['Inter'] text-sm uppercase tracking-widest hover:opacity-90 active:translate-y-0.5 transition-all inline-block text-center" style="">
+                Continue to Complex Mapping
+            </a>
+</div>
+</footer>
+<script>
+    const rowsContainer = document.getElementById('rows-container');
+
+    fetch('http://localhost:8006/mappings')
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert(data.error);
+                return;
+            }
+            renderMappings(data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Failed to fetch mappings');
+        });
+
+    function renderMappings(mappings) {
+        let html = '';
+        mappings.forEach(m => {
+            const isUndetected = m.logic === "Undetected";
+            const logicClass = isUndetected ? "bg-surface-container-highest text-on-surface-variant" : "bg-primary-fixed text-on-primary-fixed";
+            const icon = isUndetected ? "database" : "link";
+            
+            html += `
+            <div class="grid grid-cols-12 gap-4 px-8 py-6 items-center hover:bg-surface-container-low transition-all duration-300 group">
+                <div class="col-span-3">
+                    <div class="flex items-center space-x-3">
+                        <span class="material-symbols-outlined text-primary text-xl" data-icon="${icon}">${icon}</span>
+                        <span class="font-bold text-on-surface">${m.client_column}</span>
+                    </div>
+                </div>
+                <div class="col-span-3">
+                    <div class="flex items-center space-x-2">
+                        <span class="material-symbols-outlined text-secondary" data-icon="tag">tag</span>
+                        <span class="font-medium">${m.matched_signal}</span>
+                    </div>
+                </div>
+                <div class="col-span-3">
+                    <span class="px-3 py-1 ${logicClass} rounded text-xs font-bold tracking-tight">${m.logic}</span>
+                </div>
+                <div class="col-span-3 flex items-center justify-end">
+                    <label class="flex items-center cursor-pointer space-x-2">
+                        <input ${isUndetected ? '' : 'checked'} class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary focus:ring-offset-2 transition-all" type="checkbox">
+                        <span class="text-xs font-bold uppercase text-on-surface-variant tracking-wider">Select</span>
+                    </label>
+                </div>
+            </div>
+            `;
+        });
+        rowsContainer.innerHTML = html;
+    }
+
+    function normalizeName(name) {
+        return name
+            .toLowerCase()
+            .trim()
+            .replace(/[^a-z0-9]/g, '_')
+            .replace(/__+/g, '_');
+    }
+
+    // Save state on transition
+    document.querySelector('a[href*="complex.html"]').addEventListener('click', (e) => {
+        const mappings = [];
+        const rows = rowsContainer.querySelectorAll('.grid');
+        rows.forEach(row => {
+            const clientCol = row.querySelector('.col-span-3:first-child span.font-bold').textContent;
+            const normalizedCol = normalizeName(clientCol);
+            const matchedSignal = row.querySelector('.col-span-3:nth-child(2) span.font-medium').textContent;
+            const logic = row.querySelector('.col-span-3:nth-child(3) span').textContent;
+            const isApproved = row.querySelector('.col-span-3:nth-child(4) input').checked;
+            
+            mappings.push({ 
+                clientCol: normalizedCol, 
+                originalCol: clientCol, 
+                matchedSignal, 
+                logic, 
+                isApproved 
+            });
+        });
+        
+        localStorage.setItem('mappingState', JSON.stringify(mappings));
+        console.log('State saved to localStorage');
+    });
+</script>
+</body></html>

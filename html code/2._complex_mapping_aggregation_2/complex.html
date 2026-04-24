@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Babel Fish - Complex Mapping &amp; Aggregation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#727785",
+                        "surface-container-high": "#e7e8e9",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb691",
+                        "tertiary-container": "#c55500",
+                        "on-secondary-fixed": "#001a41",
+                        "tertiary": "#9e4300",
+                        "secondary": "#475e8c",
+                        "on-tertiary-container": "#0e0200",
+                        "outline-variant": "#c1c6d6",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#2e4673",
+                        "on-background": "#191c1d",
+                        "primary": "#005bbf",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#e1e3e4",
+                        "surface-dim": "#d9dadb",
+                        "secondary-fixed-dim": "#afc7fb",
+                        "on-error": "#ffffff",
+                        "primary-fixed": "#d8e2ff",
+                        "surface": "#f8f9fa",
+                        "primary-fixed-dim": "#adc7ff",
+                        "inverse-on-surface": "#f0f1f2",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e1e3e4",
+                        "on-primary-fixed": "#001a41",
+                        "on-primary-container": "#ffffff",
+                        "background": "#f8f9fa",
+                        "on-secondary-container": "#3d5481",
+                        "surface-container": "#edeeef",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#1a73e8",
+                        "on-surface": "#191c1d",
+                        "on-tertiary-fixed-variant": "#783100",
+                        "tertiary-fixed": "#ffdbcb",
+                        "inverse-surface": "#2e3132",
+                        "on-surface-variant": "#414754",
+                        "surface-tint": "#005bc0",
+                        "secondary-container": "#b2c9fe",
+                        "on-tertiary-fixed": "#341100",
+                        "surface-container-low": "#f3f4f5",
+                        "inverse-primary": "#adc7ff",
+                        "surface-bright": "#f8f9fa",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#004493",
+                        "secondary-fixed": "#d8e2ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col">
+<!-- Persistent Top Bar Panel -->
+<nav class="sticky top-0 z-[60] bg-white border-b border-surface-container-high py-4 px-12 w-full">
+<div class="max-w-screen-2xl mx-auto flex justify-between items-center">
+<div class="text-2xl font-black text-[#1a73e8] tracking-tighter" style="">Babel Fish</div>
+<div class="flex items-center space-x-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" style="">help</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" style="">account_circle</button>
+</div>
+</div>
+</nav>
+<!-- Main Canvas -->
+<main class="flex-grow w-full max-w-screen-2xl mx-auto px-12 py-10 pb-32">
+<!-- Progress Stepper (Primary Navigation Indicator) -->
+<div class="flex items-center justify-between mb-16 w-full mx-auto max-w-5xl">
+<div class="flex flex-col items-center gap-2">
+<div class="w-8 h-8 rounded-full flex items-center justify-center bg-primary text-white text-xs font-bold" style="">1</div>
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold" style="">Data Upload</span>
+</div>
+<div class="flex-grow h-[2px] mx-2 bg-primary mb-6"></div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-8 h-8 rounded-full flex items-center justify-center bg-primary text-white text-xs font-bold" style="">2</div>
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold" style="">Data Mapping</span>
+</div>
+<div class="flex-grow h-[2px] mx-2 bg-primary mb-6"></div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full flex items-center justify-center bg-gradient-to-br from-[#005bbf] to-[#1a73e8] text-white text-sm font-bold shadow-lg ring-4 ring-primary-fixed" style="">3</div>
+<span class="text-[10px] uppercase tracking-widest text-primary font-black" style="">Data Mapping</span>
+</div>
+<div class="flex-grow h-[2px] mx-2 bg-surface-container-highest mb-6"></div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-8 h-8 rounded-full flex items-center justify-center bg-surface-container-highest text-on-surface-variant text-xs font-bold" style="">4</div>
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant" style="">Value Modelling</span>
+</div>
+<div class="flex-grow h-[2px] mx-2 bg-surface-container-highest mb-6"></div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-8 h-8 rounded-full flex items-center justify-center bg-surface-container-highest text-on-surface-variant text-xs font-bold" style="">5</div>
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant" style="">Script Generation</span>
+</div>
+<div class="flex-grow h-[2px] mx-2 bg-surface-container-highest mb-6"></div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-8 h-8 rounded-full flex items-center justify-center bg-surface-container-highest text-on-surface-variant text-xs font-bold" style="">6</div>
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant" style="">Review</span>
+</div>
+</div>
+<header class="mb-12">
+<h1 class="text-4xl font-bold tracking-tight text-on-surface mb-2" style="">Multi-Signal Mapping &amp; Aggregation</h1>
+<p class="text-on-surface-variant text-lg max-w-2xl" style="">Define complex relationship logic to transform raw client data into unified Google signals.</p>
+</header>
+<!-- Mapping Table Grid -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden mb-12 shadow-[0px_4px_20px_rgba(25,28,29,0.04)]">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low border-b border-surface-container-high">
+<tr>
+<th class="px-8 py-5 font-bold text-xs uppercase tracking-widest text-on-surface-variant" style="">Client Columns</th>
+<th class="px-8 py-5 font-bold text-xs uppercase tracking-widest text-on-surface-variant" style="">Google Possible Match</th>
+<th class="px-8 py-5 font-bold text-xs uppercase tracking-widest text-on-surface-variant" style="">Relationship Logic</th>
+<th class="px-8 py-5 font-bold text-xs uppercase tracking-widest text-on-surface-variant" style="">Matching Type</th>
+<th class="px-8 py-5 font-bold text-xs uppercase tracking-widest text-on-surface-variant text-right" style="">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-low" id="complex-table-body">
+<!-- Rows will be injected here dynamically -->
+</tbody>
+</table>
+</div>
+<div class="px-8 py-4 bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl" style="">add_circle</span>
+<button class="text-primary font-bold text-sm tracking-wide" style="">ADD NEW MAPPING LOGIC</button>
+</div>
+<button id="submit-model-btn" class="bg-gradient-to-br from-[#005bbf] to-[#1a73e8] text-white px-6 py-2 rounded-md font-bold shadow-lg hover:opacity-90 transition-all active:translate-y-0.5 text-sm uppercase tracking-widest">Submit to Model</button>
+</div>
+</div>
+<!-- Aggregation Preview Section -->
+<section class="hidden">
+<div class="flex items-end justify-between mb-8">
+<div>
+<h2 class="text-2xl font-bold tracking-tight text-on-surface mb-1" style="">Final Data Preview</h2>
+<p class="text-on-surface-variant text-sm" style="">Review how your transformation logic affects raw data clusters.</p>
+</div>
+<div class="flex bg-surface-container-high p-1 rounded-md">
+<button class="px-4 py-1.5 bg-surface-container-lowest shadow-sm rounded text-xs font-bold text-primary" style="">Table View</button>
+<button class="px-4 py-1.5 text-xs font-bold text-on-surface-variant" style="">Visual Flow</button>
+</div>
+</div>
+<div class="grid grid-cols-1 gap-8">
+<!-- After Table (Expanded to full width) -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between px-2">
+<div class="flex items-center gap-2">
+<span class="text-[10px] uppercase tracking-[0.2em] font-black text-primary" style="">Unified Data<br/></span>
+<span class="material-symbols-outlined text-primary text-xs" style="">auto_awesome</span>
+</div>
+<span class="text-[10px] text-primary font-bold" style="">1 CONSOLIDATED SIGNAL</span>
+</div>
+<div class="bg-primary/5 rounded-xl p-1 border border-primary/10">
+<div class="bg-surface-container-lowest rounded-lg border border-primary/5 overflow-hidden">
+<table class="w-full text-[11px] text-left">
+<thead class="bg-primary/10 border-b border-primary/20 text-primary">
+<tr>
+<th class="px-4 py-4 font-bold" style="">Language Signal Cluster</th>
+<th class="px-4 py-4 font-bold" style="">Unified Volume Mapping</th>
+<th class="px-4 py-4 font-bold text-right" style="">Confidence Level</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-primary/5">
+<tr class="bg-primary/5">
+<td class="px-4 py-6 font-bold text-on-surface text-sm" style="">Spanish Speakers (S-FL)</td>
+<td class="px-4 py-6" style="">
+<div class="relative w-full max-w-sm group/select">
+<select class="appearance-none w-full bg-transparent border border-outline-variant/30 rounded-lg px-4 py-2 pr-10 text-sm font-medium text-on-surface focus:outline-none focus:border-primary transition-colors cursor-pointer">
+<option selected="">Language Signal Cluster</option>
+<option>City ID Match</option>
+<option>Country Code Match</option>
+<option>DMA Region</option>
+</select>
+<svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-on-surface-variant pointer-events-none group-hover/select:text-primary transition-colors" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+</div>
+</td>
+<td class="px-4 py-6" style="">
+<div class="flex justify-end">
+<button class="material-symbols-outlined text-primary hover:bg-primary/10 p-2 rounded-full transition-colors cursor-pointer" title="Select">
+check_circle
+</button>
+</div>
+</td>
+</tr>
+<tr class="opacity-50">
+<td class="px-4 py-6 text-on-surface-variant" style="">---</td>
+<td class="px-4 py-6" style="">
+<div class="relative w-full max-w-sm group/select">
+<select class="appearance-none w-full bg-transparent border border-outline-variant/30 rounded-lg px-4 py-2 pr-10 text-sm font-medium text-on-surface focus:outline-none focus:border-primary transition-colors cursor-pointer">
+<option selected="">Select mapping...</option>
+</select>
+<svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-on-surface-variant pointer-events-none" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+</div>
+</td>
+<td class="px-4 py-6 text-right text-on-surface-variant" style="">
+<div class="flex justify-end">
+<button class="material-symbols-outlined text-primary hover:bg-primary/10 p-2 rounded-full transition-colors cursor-pointer" title="Select">
+check_circle
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Shell -->
+<footer class="bg-[#f8f9fa] dark:bg-[#191c1d] fixed bottom-0 w-full shadow-[0_-4px_20px_rgba(25,28,29,0.04)] z-50">
+<div class="bg-gradient-to-r from-transparent via-[#edeeef] to-transparent h-[1px]"></div>
+<div class="flex justify-end items-center space-x-4 px-12 py-8 w-full font-['Inter'] text-sm uppercase tracking-widest">
+<a href="../1._core_identifier_mapping/mapping.html" class="text-[#414754] dark:text-[#e1e3e4] px-4 py-2 hover:bg-[#edeeef] rounded-md transition-all active:translate-y-0.5 inline-block text-center" style="">
+                Previous Step
+            </a>
+<button class="text-[#414754] dark:text-[#e1e3e4] px-4 py-2 hover:bg-[#edeeef] rounded-md transition-all active:translate-y-0.5" style="">
+                Save Draft
+            </button>
+<a href="../3._value_modelling_full_width_1/value.html" class="bg-gradient-to-br from-[#005bbf] to-[#1a73e8] text-white px-6 py-2 rounded-md font-bold shadow-lg hover:opacity-90 transition-all active:translate-y-0.5 inline-block text-center" style="">
+                Continue to Modeling
+            </a>
+</div>
+</footer>
+<script>
+    const stateStr = localStorage.getItem('mappingState');
+    const tableBody = document.getElementById('complex-table-body');
+    
+    const rules = {
+        "location": {
+            "matches": ["City_id", "country_code", "country_id", "dma_id", "zip_postal_code"],
+            "logic": "One-to-Many",
+            "matchType": "Direct"
+        },
+        "broad_interest_category": {
+            "matches": ["adx page categories", "Channels"],
+            "logic": "One-to-Many",
+            "matchType": "Direct"
+        },
+        "ethnicity_graph": {
+            "matches": ["Language", "country_id"],
+            "logic": "One-to-Many",
+            "matchType": "Direct"
+        },
+        "credit_score": {
+            "matches": ["Undetected"],
+            "logic": "Data Input",
+            "matchType": "Aggregated"
+        }
+    };
+
+    if (stateStr && tableBody) {
+        const state = JSON.parse(stateStr);
+        
+        // Show banner
+        const main = document.querySelector('main');
+        const banner = document.createElement('div');
+        banner.className = "bg-primary/10 text-primary p-4 rounded-lg mb-8 flex items-center justify-between";
+        banner.innerHTML = `
+            <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined">info</span>
+                <span class="text-sm font-medium">Loaded state from previous step (1:1 Mapping)</span>
+            </div>
+            <span class="text-xs font-bold">${state.length} mappings loaded</span>
+        `;
+        main.insertBefore(banner, main.firstChild);
+        
+        // Render rows based on rules and state
+        let html = '';
+        state.forEach(item => {
+            if (item.isApproved) {
+                const rule = rules[item.clientCol];
+                
+                let logic = item.logic;
+                let matches = [];
+                
+                if (rule) {
+                    logic = rule.logic;
+                    matches = [...rule.matches];
+                } else {
+                    matches = ["Select mapping..."];
+                }
+                
+                // Keep One-to-One logic from mapping page if applicable
+                if (item.logic === "One-to-One") {
+                    logic = "One-to-One";
+                }
+                
+                // Add matched signal from mapping page to dropdown
+                if (item.matchedSignal && item.matchedSignal !== "None") {
+                    if (!matches.includes(item.matchedSignal)) {
+                        matches.unshift(item.matchedSignal);
+                    }
+                }
+                
+                html += `
+                <tr class="hover:bg-surface-container-low transition-colors group">
+                    <td class="px-8 py-6">
+                        <div class="flex gap-2">
+                            <span class="bg-secondary-container text-on-secondary-container px-2 py-1 rounded text-xs font-semibold">${item.originalCol || item.clientCol}</span>
+                        </div>
+                    </td>
+                    <td class="px-8 py-6">
+                        <div class="relative w-64 group/select">
+                            <select class="appearance-none w-full bg-transparent border border-outline-variant/30 rounded-lg px-4 py-2 pr-10 text-sm font-medium text-on-surface focus:outline-none focus:border-primary transition-colors cursor-pointer">
+                                ${matches.map(m => `<option ${m === item.matchedSignal ? 'selected' : ''}>${m}</option>`).join('')}
+                            </select>
+                            <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-on-surface-variant pointer-events-none group-hover/select:text-primary transition-colors" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+                        </div>
+                    </td>
+                    <td class="px-8 py-6">
+                        <span class="text-on-surface-variant text-sm">${logic}</span>
+                    </td>
+                    <td class="px-8 py-6">
+                        <span class="bg-surface-container-highest text-on-surface text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-tighter">${rule ? rule.matchType : 'Translation'}</span>
+                    </td>
+                    <td class="px-8 py-6 text-right">
+                        <div class="flex justify-end">
+                            <input type="checkbox" checked class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary focus:ring-offset-2 transition-all">
+                        </div>
+                    </td>
+                </tr>
+                `;
+            }
+        });
+        
+        if (html) {
+            tableBody.innerHTML = html;
+        }
+    }
+
+    // Submit to Model logic
+    const submitBtn = document.getElementById('submit-model-btn');
+    if (submitBtn) {
+        submitBtn.addEventListener('click', () => {
+            const complexMappings = [];
+            const rows = tableBody.querySelectorAll('tr');
+            rows.forEach(row => {
+                const clientCol = row.querySelector('td:first-child span').textContent;
+                const selectedSignal = row.querySelector('td:nth-child(2) select').value;
+                const logic = row.querySelector('td:nth-child(3) span').textContent;
+                const isSelected = row.querySelector('td:nth-child(5) input').checked;
+                
+                let savedCol = clientCol;
+                if ((logic === "One-to-Many" || logic === "One-to-One") && isSelected) {
+                    savedCol = selectedSignal;
+                }
+                
+                complexMappings.push({ 
+                    clientCol: savedCol, 
+                    originalCol: clientCol, 
+                    selectedSignal, 
+                    logic, 
+                    isSelected 
+                });
+            });
+            
+            localStorage.setItem('complexMappingState', JSON.stringify(complexMappings));
+            
+            // Send to backend to generate CSV
+            fetch('http://localhost:8006/save_csv', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(complexMappings)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert('Failed to save CSV: ' + data.error);
+                } else {
+                    // Call transform_data endpoint
+                    fetch('http://localhost:8006/transform_data', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(complexMappings)
+                    })
+                    .then(res => res.json())
+                    .then(tData => {
+                        if (tData.error) {
+                            alert('CSV saved, but failed to transform data: ' + tData.error);
+                        } else {
+                            alert('Mappings submitted and data file transformed successfully!');
+                        }
+                    })
+                    .catch(err => {
+                        console.error('Error:', err);
+                        alert('CSV saved, but failed to connect for data transformation.');
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to send data to server');
+            });
+        });
+    }
+</script>
+</body></html>

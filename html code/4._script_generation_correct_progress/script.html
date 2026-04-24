@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "outline": "#727785",
+                  "surface-container-high": "#e7e8e9",
+                  "on-tertiary": "#ffffff",
+                  "tertiary-fixed-dim": "#ffb691",
+                  "tertiary-container": "#c55500",
+                  "on-secondary-fixed": "#001a41",
+                  "tertiary": "#9e4300",
+                  "secondary": "#475e8c",
+                  "on-tertiary-container": "#0e0200",
+                  "outline-variant": "#c1c6d6",
+                  "on-error-container": "#93000a",
+                  "on-secondary-fixed-variant": "#2e4673",
+                  "on-background": "#191c1d",
+                  "primary": "#005bbf",
+                  "error-container": "#ffdad6",
+                  "surface-container-highest": "#e1e3e4",
+                  "surface-dim": "#d9dadb",
+                  "secondary-fixed-dim": "#afc7fb",
+                  "on-error": "#ffffff",
+                  "primary-fixed": "#d8e2ff",
+                  "surface": "#f8f9fa",
+                  "primary-fixed-dim": "#adc7ff",
+                  "inverse-on-surface": "#f0f1f2",
+                  "error": "#ba1a1a",
+                  "surface-variant": "#e1e3e4",
+                  "on-primary-fixed": "#001a41",
+                  "on-primary-container": "#ffffff",
+                  "background": "#f8f9fa",
+                  "on-secondary-container": "#3d5481",
+                  "surface-container": "#edeeef",
+                  "surface-container-lowest": "#ffffff",
+                  "primary-container": "#1a73e8",
+                  "on-surface": "#191c1d",
+                  "on-tertiary-fixed-variant": "#783100",
+                  "tertiary-fixed": "#ffdbcb",
+                  "inverse-surface": "#2e3132",
+                  "on-surface-variant": "#414754",
+                  "surface-tint": "#005bc0",
+                  "secondary-container": "#b2c9fe",
+                  "on-tertiary-fixed": "#341100",
+                  "surface-container-low": "#f3f4f5",
+                  "inverse-primary": "#adc7ff",
+                  "surface-bright": "#f8f9fa",
+                  "on-primary": "#ffffff",
+                  "on-secondary": "#ffffff",
+                  "on-primary-fixed-variant": "#004493",
+                  "secondary-fixed": "#d8e2ff"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.125rem",
+                  "lg": "0.25rem",
+                  "xl": "0.5rem",
+                  "full": "0.75rem"
+          },
+          "fontFamily": {
+                  "headline": ["Inter"],
+                  "body": ["Inter"],
+                  "label": ["Inter"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body { font-family: 'Inter', sans-serif; }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(193, 198, 214, 0.15);
+      border-left: 1px solid rgba(193, 198, 214, 0.15);
+    }
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #e1e3e4; border-radius: 10px; }
+  </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col">
+<!-- Top Branding Bar -->
+<header class="bg-white dark:bg-[#191c1d] border-b border-surface-container-high h-[72px] flex items-center justify-center sticky top-0 z-[60]">
+<div class="w-full max-w-screen-2xl px-12 flex justify-between items-center">
+<div class="flex items-center">
+<span class="text-2xl font-black text-[#1a73e8] tracking-tight">Babel Fish</span>
+</div>
+<div class="flex items-center gap-6">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors text-2xl">help</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors text-2xl">account_circle</button>
+</div>
+</div>
+</header>
+<!-- Progress Stepper (Primary Navigation Indicator) -->
+<div class="w-full bg-surface-container-lowest py-8 border-b border-surface-container-high">
+<div class="max-w-screen-xl mx-auto px-12 flex items-center justify-between">
+<div class="flex items-center space-x-8 w-full">
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold">01</span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Data Upload</span>
+</div>
+<div class="h-[2px] flex-grow bg-primary"></div>
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold">02</span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">DATA MAPPING</span>
+</div>
+<div class="h-[2px] flex-grow bg-primary"></div>
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold">03</span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Data Mapping</span>
+</div>
+<div class="h-[2px] flex-grow bg-primary"></div>
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold">04</span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Value Modelling</span>
+</div>
+<div class="h-[2px] flex-grow bg-primary"></div>
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold ring-4 ring-primary-fixed">05</span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-primary">Script Generation</span>
+</div>
+<div class="h-[2px] flex-grow bg-surface-container-high"></div>
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center text-xs font-bold">06</span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant opacity-40">Review</span>
+</div>
+</div>
+</div>
+</div>
+<main class="flex-grow max-w-screen-2xl mx-auto w-full px-12 py-10 flex flex-col md:flex-row gap-10 overflow-hidden">
+<!-- Summary Sidebar: Review Goal & Params -->
+<aside class="w-full md:w-80 flex flex-col gap-6 shrink-0">
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-[0_4px_20px_rgba(25,28,29,0.04)] flex flex-col gap-8">
+<div>
+<h3 class="text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant mb-4">Review Goal</h3>
+<div class="flex items-center gap-3 p-3 bg-primary-fixed/30 rounded-lg">
+<span class="material-symbols-outlined text-primary text-xl">track_changes</span>
+<span class="text-on-primary-fixed font-bold text-lg">Reach</span>
+</div>
+</div>
+<div>
+<h3 class="text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant mb-4">Value Model</h3>
+<div class="space-y-1">
+<p class="text-on-surface font-semibold">Linear Weighted</p>
+<p class="text-xs text-on-surface-variant leading-relaxed">Attributing value consistently across session touchpoints.</p>
+</div>
+</div>
+<div>
+<h3 class="text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant mb-4">Key Columns</h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-surface-container-high rounded text-[11px] font-mono font-bold text-secondary">Domain</span>
+<span class="px-2 py-1 bg-surface-container-high rounded text-[11px] font-mono font-bold text-secondary">Session_ID</span>
+<span class="px-2 py-1 bg-surface-container-high rounded text-[11px] font-mono font-bold text-secondary">Language</span>
+</div>
+</div>
+<div class="pt-4 border-t border-surface-container">
+<button class="w-full py-3 text-sm font-bold text-primary hover:bg-primary-fixed transition-colors flex items-center justify-center gap-2 rounded-lg group">
+<span class="material-symbols-outlined text-lg group-active:scale-95 transition-transform">edit</span>
+            Edit Input
+          </button>
+</div>
+</div>
+<div class="bg-gradient-to-br from-tertiary/10 to-tertiary-fixed/20 p-6 rounded-xl relative overflow-hidden group">
+<div class="relative z-10">
+<p class="text-xs font-bold text-tertiary-fixed-variant uppercase tracking-widest mb-2">Notice</p>
+<p class="text-sm text-on-tertiary-fixed-variant leading-relaxed">Final review ensures the generated logic matches your BigQuery data schema before DV360 injection.</p>
+</div>
+<span class="material-symbols-outlined absolute -bottom-4 -right-4 text-8xl text-tertiary/10 group-hover:rotate-12 transition-transform duration-500">verified_user</span>
+</div>
+</aside>
+<!-- Center: Code Editor & Main Actions -->
+<section class="flex-grow flex flex-col min-w-0">
+<div class="flex justify-between items-end mb-6">
+<div>
+<h1 class="text-3xl font-extrabold tracking-tight text-on-surface mb-2">Final Review &amp; Deployment</h1>
+<p class="text-on-surface-variant max-w-xl">Review your custom bidding algorithm below. This Python script is generated dynamically based on your mapping and weighted value rules.</p>
+</div>
+<button id="gen-script-btn" class="bg-secondary-container text-on-secondary-container px-6 py-2.5 rounded-lg font-bold text-sm flex items-center gap-2 hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-lg">restart_alt</span>
+          Generate Script
+        </button>
+</div>
+<!-- Code Editor Block -->
+<div class="flex-grow bg-[#1e1e1e] rounded-xl overflow-hidden shadow-2xl flex flex-col border border-[#333333]">
+<div class="bg-[#2d2d2d] px-4 py-3 flex items-center justify-between border-b border-[#3d3d3d]">
+<div class="flex items-center gap-2">
+<div class="flex gap-1.5">
+<div class="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
+<div class="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
+<div class="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+</div>
+<span class="ml-4 text-[11px] font-mono text-[#858585] uppercase tracking-widest">custom_bidding_model.py</span>
+</div>
+<button class="text-[#858585] hover:text-white transition-colors">
+<span class="material-symbols-outlined text-lg">content_copy</span>
+</button>
+</div>
+<div class="p-6 font-mono text-sm leading-relaxed overflow-y-auto custom-scrollbar flex-grow">
+<div class="flex">
+<div class="text-[#4b4b4b] pr-4 text-right select-none w-8 shrink-0">1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20</div>
+<div id="code-display" class="text-[#d4d4d4]">
+<span class="text-[#569cd6]">import</span> tensorflow <span class="text-[#569cd6]">as</span> tf<br/>
+<span class="text-[#569cd6]">from</span> dv360_api <span class="text-[#569cd6]">import</span> BiddingModel<br/>
+<br/>
+<span class="text-[#6a9955]"># BABEL FISH AI GENERATED LOGIC</span><br/>
+<span class="text-[#569cd6]">def</span> <span class="text-[#dcdcaa]">calculate_impression_value</span>(impression_data):<br/>
+                  domain = impression_data[<span class="text-[#ce9178]">'Domain'</span>]<br/>
+                  session_id = impression_data[<span class="text-[#ce9178]">'Session_ID'</span>]<br/>
+                  <br/>
+                  base_weight = <span class="text-[#b5cea8]">1.0</span><br/>
+                  <span class="text-[#569cd6]">if</span> domain <span class="text-[#569cd6]">in</span> premium_white_list:<br/>
+                      base_weight *= <span class="text-[#b5cea8]">1.5</span><br/>
+                  <br/>
+                  <span class="text-[#6a9955]"># Apply Linear Weighted Model Logic</span><br/>
+                  touchpoint_score = evaluate_session(session_id)<br/>
+                  <span class="text-[#569cd6]">return</span> base_weight * touchpoint_score<br/>
+<br/>
+<span class="text-[#569cd6]">if</span> __name__ == <span class="text-[#ce9178]">"__main__"</span>:<br/>
+                  model = BiddingModel(goal=<span class="text-[#ce9178]">"REACH"</span>)<br/>
+                  model.deploy_custom_script(calculate_impression_value)
+            </div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<div class="h-24"></div> <!-- Spacer for fixed footer -->
+<!-- Footer Implementation -->
+<footer class="fixed bottom-0 w-full bg-[#f8f9fa] dark:bg-[#191c1d] shadow-[0_-4px_20px_rgba(25,28,29,0.04)] z-50">
+<div class="bg-gradient-to-r from-transparent via-[#edeeef] to-transparent h-[1px]"></div>
+<div class="flex justify-end items-center space-x-4 px-12 py-8 w-full font-['Inter'] text-sm uppercase tracking-widest">
+<button class="text-[#414754] dark:text-[#e1e3e4] px-4 py-2 hover:bg-[#edeeef] rounded-md transition-all">
+        Previous Step
+      </button>
+<button class="text-[#414754] dark:text-[#e1e3e4] px-4 py-2 hover:bg-[#edeeef] rounded-md transition-all">
+        Save Draft
+      </button>
+<button class="bg-gradient-to-br from-[#005bbf] to-[#1a73e8] text-white px-6 py-2 rounded-md font-bold shadow-lg flex items-center gap-2 hover:opacity-90 active:translate-y-0.5 transition-all">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">cloud_upload</span>
+        Push to DV360 API
+      </button>
+</div>
+</footer>
+
+<script>
+    const genScriptBtn = document.getElementById('gen-script-btn');
+    const codeDisplay = document.getElementById('code-display');
+
+    if (genScriptBtn && codeDisplay) {
+        genScriptBtn.addEventListener('click', () => {
+            const results = JSON.parse(localStorage.getItem('finalValueAssignment') || '{}');
+            
+            if (Object.keys(results).length === 0) {
+                alert('No value assignments found in local storage. Please complete the previous steps!');
+                return;
+            }
+            
+            fetch('http://localhost:8006/generate_script', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(results)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert('Error generating script: ' + data.error);
+                } else {
+                    codeDisplay.innerHTML = `<pre class="text-[#d4d4d4]">${data.script}</pre>`;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to connect to server to generate script.');
+            });
+        });
+    }
+</script>
+</body></html>
