@@ -109,55 +109,34 @@
 </header>
 <!-- Content Area -->
 <div class="p-8 max-w-[1440px] mx-auto">
-<!-- Atmospheric Progress Bar -->
-<div class="mb-12">
-
-<div class="flex items-center justify-center max-w-4xl mx-auto mb-16">
-<!-- Step 1: Completed -->
-<div class="flex flex-col items-center flex-1">
-<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-sm z-10">
-<span class="material-symbols-outlined text-sm" style="">check</span>
+<!-- Progress Stepper (Primary Navigation Indicator) -->
+<div class="w-full bg-surface-container-lowest py-8 border-b border-surface-container-high mb-12">
+<div class="max-w-screen-xl mx-auto px-12 flex items-center justify-between">
+<div class="flex items-center space-x-8 w-full">
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold">01</span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-primary">Data Upload</span>
 </div>
-<span class="mt-2 text-[10px] font-medium text-on-surface-variant opacity-60 uppercase tracking-tighter text-center px-1">Data Upload</span>
+<div class="h-[2px] flex-grow bg-primary"></div>
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold">02</span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-primary">Data Translation</span>
 </div>
-<div class="h-0.5 bg-primary flex-1 -mt-6"></div>
-
-<!-- Step 2: Completed -->
-<div class="flex flex-col items-center flex-1">
-<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-sm z-10">
-<span class="material-symbols-outlined text-sm" style="">check</span>
+<div class="h-[2px] flex-grow bg-primary"></div>
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold">03</span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-primary">Data Mapping</span>
 </div>
-<span class="mt-2 text-[10px] font-medium text-on-surface-variant opacity-60 uppercase tracking-tighter text-center px-1">Data Translation</span>
+<div class="h-[2px] flex-grow bg-primary"></div>
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold ring-4 ring-primary-fixed">04</span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-primary">Value Modeling</span>
 </div>
-<div class="h-0.5 bg-primary flex-1 -mt-6"></div>
-
-<!-- Step 3: Completed -->
-<div class="flex flex-col items-center flex-1">
-<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-sm z-10">
-<span class="material-symbols-outlined text-sm" style="">check</span>
+<div class="h-[2px] flex-grow bg-surface-container-high"></div>
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center text-xs font-bold">05</span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant opacity-40">Script Generation</span>
 </div>
-<span class="mt-2 text-[10px] font-medium text-on-surface-variant opacity-60 uppercase tracking-tighter text-center px-1">Data Mapping</span>
-</div>
-<div class="h-0.5 bg-primary flex-1 -mt-6"></div>
-
-<!-- Step 4: Active -->
-<div class="flex flex-col items-center flex-1">
-<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-sm z-10" style="">4</div>
-<span class="mt-2 text-[10px] font-bold text-primary uppercase tracking-tighter text-center px-1">Value Modelling</span>
-</div>
-<div class="h-0.5 bg-surface-container-highest flex-1 -mt-6"></div>
-
-<!-- Step 5 -->
-<div class="flex flex-col items-center flex-1">
-<div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold text-sm z-10" style="">5</div>
-<span class="mt-2 text-[10px] font-medium text-on-surface-variant opacity-40 uppercase tracking-tighter text-center px-1">Script Generation</span>
-</div>
-<div class="h-0.5 bg-surface-container-highest flex-1 -mt-6"></div>
-
-<!-- Step 6 -->
-<div class="flex flex-col items-center flex-1">
-<div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold text-sm z-10" style="">6</div>
-<span class="mt-2 text-[10px] font-medium text-on-surface-variant opacity-40 uppercase tracking-tighter text-center px-1">Review</span>
 </div>
 </div>
 </div>
@@ -426,12 +405,15 @@
         
         const top5 = data.slice(0, 5);
         
+        const standardKeys = ["total_users", "high_score_count", "percentage_high_scores", "median_score_of_top_tier", "value_score", "dma_value_100", "dma_tier"];
+        const locationLabel = Object.keys(data[0]).find(k => !standardKeys.includes(k)) || "location";
+        
         html += `<div class="space-y-4 bg-slate-900/50 p-6 rounded-xl border border-slate-800">`;
         
         top5.forEach(row => {
             html += `
             <div class="flex items-center justify-between">
-                <span class="text-slate-300 text-xs w-32 truncate">${row.location}</span>
+                <span class="text-slate-300 text-xs w-32 truncate">${row[locationLabel]}</span>
                 <div class="flex-1 mx-4 h-2 bg-slate-800 rounded-full overflow-hidden relative">
                     <div class="h-full bg-gradient-to-r from-[#e0e7ff] via-[#6366f1] to-[#1d4ed8] opacity-80" style="width: ${row.dma_value_100}%"></div>
                 </div>

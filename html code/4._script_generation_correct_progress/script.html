@@ -115,7 +115,7 @@
 <div class="h-[2px] flex-grow bg-primary"></div>
 <div class="flex items-center gap-2">
 <span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold">02</span>
-<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">DATA MAPPING</span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Data Translation</span>
 </div>
 <div class="h-[2px] flex-grow bg-primary"></div>
 <div class="flex items-center gap-2">
@@ -125,17 +125,12 @@
 <div class="h-[2px] flex-grow bg-primary"></div>
 <div class="flex items-center gap-2">
 <span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold">04</span>
-<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Value Modelling</span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Value Modeling</span>
 </div>
 <div class="h-[2px] flex-grow bg-primary"></div>
 <div class="flex items-center gap-2">
 <span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold ring-4 ring-primary-fixed">05</span>
 <span class="text-[10px] font-bold uppercase tracking-widest text-primary">Script Generation</span>
-</div>
-<div class="h-[2px] flex-grow bg-surface-container-high"></div>
-<div class="flex items-center gap-2">
-<span class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center text-xs font-bold">06</span>
-<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant opacity-40">Review</span>
 </div>
 </div>
 </div>
@@ -154,16 +149,14 @@
 <div>
 <h3 class="text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant mb-4">Value Model</h3>
 <div class="space-y-1">
-<p class="text-on-surface font-semibold">Linear Weighted</p>
-<p class="text-xs text-on-surface-variant leading-relaxed">Attributing value consistently across session touchpoints.</p>
+<p class="text-on-surface font-semibold">Weighted Scoring with Quantile Binning Value Assignment approach</p>
 </div>
 </div>
 <div>
 <h3 class="text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant mb-4">Key Columns</h3>
 <div class="flex flex-wrap gap-2">
-<span class="px-2 py-1 bg-surface-container-high rounded text-[11px] font-mono font-bold text-secondary">Domain</span>
-<span class="px-2 py-1 bg-surface-container-high rounded text-[11px] font-mono font-bold text-secondary">Session_ID</span>
-<span class="px-2 py-1 bg-surface-container-high rounded text-[11px] font-mono font-bold text-secondary">Language</span>
+<span class="px-2 py-1 bg-surface-container-high rounded text-[11px] font-mono font-bold text-secondary">city_id</span>
+<span class="px-2 py-1 bg-surface-container-high rounded text-[11px] font-mono font-bold text-secondary">index</span>
 </div>
 </div>
 <div class="pt-4 border-t border-surface-container">
@@ -242,19 +235,32 @@
 <footer class="fixed bottom-0 w-full bg-[#f8f9fa] dark:bg-[#191c1d] shadow-[0_-4px_20px_rgba(25,28,29,0.04)] z-50">
 <div class="bg-gradient-to-r from-transparent via-[#edeeef] to-transparent h-[1px]"></div>
 <div class="flex justify-end items-center space-x-4 px-12 py-8 w-full font-['Inter'] text-sm uppercase tracking-widest">
-<button class="text-[#414754] dark:text-[#e1e3e4] px-4 py-2 hover:bg-[#edeeef] rounded-md transition-all">
+<a href="../3._value_modelling_full_width_1/value.html" class="flex items-center gap-2 text-sm font-bold text-on-surface-variant hover:text-on-surface transition-colors">
         Previous Step
-      </button>
+      </a>
 <button class="text-[#414754] dark:text-[#e1e3e4] px-4 py-2 hover:bg-[#edeeef] rounded-md transition-all">
         Save Draft
       </button>
-<button class="bg-gradient-to-br from-[#005bbf] to-[#1a73e8] text-white px-6 py-2 rounded-md font-bold shadow-lg flex items-center gap-2 hover:opacity-90 active:translate-y-0.5 transition-all">
+<button id="push-btn" class="bg-gradient-to-br from-[#005bbf] to-[#1a73e8] text-white px-6 py-2 rounded-md font-bold shadow-lg flex items-center gap-2 hover:opacity-90 active:translate-y-0.5 transition-all">
 <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">cloud_upload</span>
         Push to DV360 API
       </button>
 </div>
 </footer>
+<!-- Modal Backdrop -->
+<div id="modal-backdrop" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-[90] transition-opacity duration-300 opacity-0"></div>
 
+<!-- Modal Content -->
+<div id="modal" class="fixed inset-0 flex items-center justify-center z-[100] hidden">
+    <div class="bg-white rounded-2xl p-10 max-w-lg w-full shadow-2xl transform transition-all duration-300 scale-90 opacity-0 text-center">
+        <div class="w-20 h-20 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-6">
+            <span class="material-symbols-outlined text-emerald-600 text-5xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+        </div>
+        <h2 class="text-3xl font-extrabold text-on-surface mb-2">Success!</h2>
+        <p class="text-on-surface-variant text-lg">Successfully pushed to DV360 API!</p>
+        <button id="close-modal-btn" class="mt-8 bg-primary text-white px-6 py-3 rounded-lg font-bold hover:bg-primary/90 transition-colors">Got it</button>
+    </div>
+</div>
 <script>
     const genScriptBtn = document.getElementById('gen-script-btn');
     const codeDisplay = document.getElementById('code-display');
@@ -285,6 +291,39 @@
                 console.error('Error:', error);
                 alert('Failed to connect to server to generate script.');
             });
+        });
+    }
+
+    // Push to DV360 API logic
+    const pushBtn = document.getElementById('push-btn');
+    const modal = document.getElementById('modal');
+    const backdrop = document.getElementById('modal-backdrop');
+    const closeBtn = document.getElementById('close-modal-btn');
+    
+    if (pushBtn && modal && backdrop && closeBtn) {
+        pushBtn.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+            backdrop.classList.remove('hidden');
+            
+            // Trigger transition
+            setTimeout(() => {
+                backdrop.classList.add('opacity-100');
+                const content = modal.querySelector('div');
+                content.classList.remove('scale-90', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        });
+        
+        closeBtn.addEventListener('click', () => {
+            const content = modal.querySelector('div');
+            content.classList.add('scale-90', 'opacity-0');
+            content.classList.remove('scale-100', 'opacity-100');
+            backdrop.classList.remove('opacity-100');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                backdrop.classList.add('hidden');
+            }, 300);
         });
     }
 </script>

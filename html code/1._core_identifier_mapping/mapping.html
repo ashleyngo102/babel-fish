@@ -96,44 +96,35 @@
 </header>
 <main class="pt-28 pb-40 px-12 max-w-screen-2xl mx-auto min-h-screen">
 <!-- Stepper -->
-<div class="mb-16">
-<div class="flex items-center justify-center max-w-4xl mx-auto">
-<!-- Step 1: Completed -->
-<div class="flex flex-col items-center flex-1">
-<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-sm z-10">
-<span class="material-symbols-outlined text-sm" style="">check</span>
+<!-- Progress Stepper (Primary Navigation Indicator) -->
+<div class="w-full bg-surface-container-lowest py-8 border-b border-surface-container-high mb-12">
+<div class="max-w-screen-xl mx-auto px-12 flex items-center justify-between">
+<div class="flex items-center space-x-8 w-full">
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold">01</span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-primary">Data Upload</span>
 </div>
-<span class="mt-2 text-[10px] font-medium text-on-surface-variant opacity-60 uppercase tracking-tighter text-center px-1" style="">Data Upload</span>
+<div class="h-[2px] flex-grow bg-primary"></div>
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold ring-4 ring-primary-fixed">02</span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-primary">Data Translation</span>
 </div>
-<div class="h-0.5 bg-primary flex-1 -mt-6"></div>
-<!-- Step 2: Active -->
-<div class="flex flex-col items-center flex-1">
-<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-sm z-10" style="">2</div>
-<span class="mt-2 text-[10px] font-bold text-primary uppercase tracking-tighter text-center px-1" style="">Data Translation</span>
+<div class="h-[2px] flex-grow bg-surface-container-high"></div>
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center text-xs font-bold">03</span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant opacity-40">Data Mapping</span>
 </div>
-<div class="h-0.5 bg-surface-container-highest flex-1 -mt-6"></div>
-<!-- Step 3 -->
-<div class="flex flex-col items-center flex-1">
-<div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold text-sm z-10" style="">3</div>
-<span class="mt-2 text-[10px] font-medium text-on-surface-variant opacity-40 uppercase tracking-tighter text-center px-1" style="">Data Mapping</span>
+<div class="h-[2px] flex-grow bg-surface-container-high"></div>
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center text-xs font-bold">04</span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant opacity-40">Value Modeling</span>
 </div>
-<div class="h-0.5 bg-surface-container-highest flex-1 -mt-6"></div>
-<!-- Step 4 -->
-<div class="flex flex-col items-center flex-1">
-<div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold text-sm z-10" style="">4</div>
-<span class="mt-2 text-[10px] font-medium text-on-surface-variant opacity-40 uppercase tracking-tighter text-center px-1" style="">Value Modelling</span>
+<div class="h-[2px] flex-grow bg-surface-container-high"></div>
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center text-xs font-bold">05</span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant opacity-40">Script Generation</span>
 </div>
-<div class="h-0.5 bg-surface-container-highest flex-1 -mt-6"></div>
-<!-- Step 5 -->
-<div class="flex flex-col items-center flex-1">
-<div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold text-sm z-10" style="">5</div>
-<span class="mt-2 text-[10px] font-medium text-on-surface-variant opacity-40 uppercase tracking-tighter text-center px-1" style="">Script Generation</span>
 </div>
-<div class="h-0.5 bg-surface-container-highest flex-1 -mt-6"></div>
-<!-- Step 6 -->
-<div class="flex flex-col items-center flex-1">
-<div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold text-sm z-10" style="">6</div>
-<span class="mt-2 text-[10px] font-medium text-on-surface-variant opacity-40 uppercase tracking-tighter text-center px-1" style="">Review</span>
 </div>
 </div>
 </div>
