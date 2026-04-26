@@ -39,6 +39,8 @@ class RequestHandler(BaseHTTPRequestHandler):
             self.handle_transform_data()
         elif self.path == '/generate_script':
             self.handle_generate_script()
+        elif self.path == '/evaluate_data':
+            self.handle_evaluate_data()
         else:
             self._set_headers(404)
             self.wfile.write(json.dumps({"error": "Not found"}).encode())
@@ -388,6 +390,108 @@ return 0.0
             
             self._set_headers()
             self.wfile.write(json.dumps({"script": script}).encode())
+        except Exception as e:
+            self._set_headers(500)
+            self.wfile.write(json.dumps({"error": str(e)}).encode())
+
+    def handle_evaluate_data(self):
+        content_length = int(self.headers['Content-Length'])
+        post_data = self.rfile.read(content_length)
+        try:
+            req_data = json.loads(post_data.decode('utf-8'))
+            source = req_data.get('source')
+            file_content = req_data.get('file_content', '')
+            
+            f = io.StringIO(file_content)
+            reader = csv.reader(f)
+            headers = [h.strip() for h in next(reader, []) if h.strip()]
+            
+            errors = []
+            warnings = []
+            notes = []
+            passed = []
+            
+            reasons = {
+                'Order ID': "Prevents duplicate uploads from being counted multiple times.",
+                'Conversion Value': "Provides value signal for bidding.",
+                'Conversion Currency': "Required if value is provided.",
+                'Consent': "Recommended for privacy compliance.",
+                'User IP Address': "Captures full breadth of measurement when attribution becomes available.",
+                'Session Attributes': "Enables Google Ads to more accurately attribute conversions.",
+                'Braid': "Maintains conversion reporting when GCLID is unavailable.",
+                'revenue': "Monetary value associated with conversion.",
+                'customVariables': "Allows custom data passing."
+            }
+            
+            if source == 'data_manager':
+                if 'Conversion Name' in headers:
+                    passed.append("Conversion Name: Present and mapped.")
+                else:
+                    errors.append("Missing required field: Conversion Name")
+                    
+                if 'Conversion Time' in headers:
+                    passed.append("Conversion Time: Present and mapped.")
+                else:
+                    errors.append("Missing required field: Conversion Time")
+                    
+                identifiers = ['Email', 'Phone Number', 'First Name', 'gclid']
+                has_id = any(id in headers for id in identifiers)
+                if has_id:
+                    passed.append("Identifier: At least one user identifier is present.")
+                else:
+                    errors.append("Missing at least one required identifier (Email, Phone Number, First Name, or gclid)")
+                    
+                recommended = ['Order ID', 'Conversion Value', 'Conversion Currency', 'Consent', 'User IP Address', 'Session Attributes', 'Braid']
+                for rec in recommended:
+                    if rec not in headers:
+                        warnings.append({
+                            "field": rec,
+                            "reason": reasons.get(rec, "Recommended for better performance.")
+                        })
+                    else:
+                        passed.append(f"{rec}: Optional field present.")
+                        
+                if 'floodlightConfigurationId' in headers or 'floodlightActivityId' in headers:
+                    notes.append("It looks like you uploaded a Campaign Manager (OCI) file while Data Manager was selected. Please verify your selection.")
+                        
+            elif source == 'campaign_manager':
+                required = ['floodlightConfigurationId', 'floodlightActivityId', 'timestampMicros', 'ordinal', 'quantity']
+                for req in required:
+                    if req in headers:
+                        passed.append(f"{req}: Core required field present.")
+                    else:
+                        errors.append(f"Missing core required field: {req}")
+                        
+                identifiers = ['encryptedUserId', 'mobileDeviceId', 'gclid', 'dclid', 'matchId', 'impressionId', 'session_attributes']
+                has_id = any(id in headers for id in identifiers)
+                if has_id:
+                    passed.append("Identifier: At least one identifier field is present.")
+                else:
+                    errors.append("Missing at least one required identifier field")
+                    
+                recommended = ['revenue', 'customVariables']
+                for rec in recommended:
+                    if rec not in headers:
+                        warnings.append({
+                            "field": rec,
+                            "reason": reasons.get(rec, "Recommended for better performance.")
+                        })
+                    else:
+                        passed.append(f"{rec}: Optional field present.")
+                        
+                if 'Conversion Name' in headers:
+                    notes.append("It looks like you uploaded a Data Manager file while Campaign Manager was selected. Please verify your selection.")
+            else:
+                raise ValueError(f"Unknown source: {source}")
+                
+            self._set_headers()
+            self.wfile.write(json.dumps({
+                "errors": errors,
+                "warnings": warnings,
+                "notes": notes,
+                "passed": passed,
+                "compliance_score": 100 - len(errors) * 10
+            }).encode())
         except Exception as e:
             self._set_headers(500)
             self.wfile.write(json.dumps({"error": str(e)}).encode())

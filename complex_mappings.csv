@@ -1,4 +1,4 @@
 Client Column,Selected Signal,Relationship Logic,Is Selected,Original Column
 City_id,City_id,One-to-Many,True,location
-dx_page_categories,adx_page_categories,One-to-One,False,dx_page_categories
+Site_id,site_id,One-to-One,False,Site_id
 credit_score,Undetected,Data Input,True,credit_score
